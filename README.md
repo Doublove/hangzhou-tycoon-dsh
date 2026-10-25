@@ -2,7 +2,7 @@
 
 以 2010—2026 年杭州楼市为背景的回合制地产经营游戏。一回合一个月，四章十六年，买地、加杠杆、扛调控。
 
-**在线试玩：** https://doublove.github.io/hangzhou-tycoon/
+**在线试玩：** https://doublove.github.io/hangzhou-tycoon-dsh/
 **仓库：** https://github.com/Doublove/hangzhou-tycoon-dsh
 **当前版本：** v1.10.0 ｜ 变更记录见 [CHANGELOG.md](./CHANGELOG.md) ｜ 需求文档见 [`docs/杭州大富翁_游戏开发需求文档_V1.9.docx`](./docs/)
 
