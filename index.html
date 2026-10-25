@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>杭州大富翁 · 2010—2026 楼市经营</title>
+<meta name="description" content="以 2010—2026 杭州楼市为背景的回合制地产经营游戏。一回合一个月，四章十六年，买地、加杠杆、扛调控。">
+<style>
+  :root{
+    --paper:#F5F0E6; --ink:#2A2420; --ink-soft:#6B6156;
+    --teal:#2E7D6F; --gold:#C9A227; --line:#D8CDBB;
+    --red:#B3261E; --green:#1B7A3E;
+    --cell:44px;
+    --ts:2;                          /* UI 字号倍率：所有 font-size 都乘它 */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    background:var(--paper); color:var(--ink);
+    display:flex; justify-content:center; padding:8px; overflow-x:hidden;
+  }
+  #app{width:100%;max-width:430px;display:flex;flex-direction:column;gap:7px}
+
+  /* ============ 响应式骨架 ============
+     棋盘是这套布局的尺子：--board 用 clamp 纯 CSS 算，锁在 600—1200px，
+     不依赖脚本；右侧栏 = 棋盘 × 0.58，并用 zoom = 棋盘/800 等比放大字号与间距。
+
+     两个必须记住的坑：
+     1. 窄屏时 #boardCol/#sideCol 用 display:contents 摊平，宽屏必须把 #boardCol
+        复位成 block，否则棋盘会直接变成 flex 子项——而它带 margin:0 auto，
+        auto margin 会吃掉剩余空间，把右侧栏顶到屏幕最右边。
+     2. #app 宽屏要 width:auto（收缩到内容），否则整行留白会分摊到两侧。 */
+  #boardCol,#sideCol{display:contents}
+  #hud{order:-1}
+
+  @media (min-width:1080px){
+    :root{
+      /* 60 = 两侧 padding 28 + 列间距 16 + 余量 16
+         侧栏 = 棋盘 × .70 且不小于 430px，所以棋盘宽度要同时满足两个约束 */
+      --board: var(--board-user, clamp(600px,
+                 min(calc((100vw - 60px) / 1.70), calc(100vw - 60px - 430px)),
+                 1200px));
+      --k: calc(var(--board) / 800);
+    }
+    body{padding:14px;align-items:flex-start}
+    #app{
+      width:auto; max-width:none; display:flex; flex-direction:row; gap:16px;
+      align-items:flex-start;
+    }
+    #hud{order:0}
+    #boardCol{display:block; flex:0 0 auto; width:var(--board); position:sticky; top:14px}
+    #boardOuter{margin:0}
+    /* zoom 在布局前生效，宽度要反算：渲染宽 = width × k = 棋盘 × 0.58 */
+    #sideCol{
+      display:flex; flex:0 0 auto; flex-direction:column; gap:10px;
+      width:calc(max(430px, var(--board) * .70) / var(--k));
+      zoom:var(--k);
+    }
+    #log{height:250px}
+    #kChart{height:148px}
+  }
+
+  /* ============ 玩家栏 ============ */
+  #hud{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 10px;box-shadow:0 2px 0 var(--line)}
+  .hud-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  #date{font-size:calc(15px * var(--ts));font-weight:800;letter-spacing:.5px}
+  #chapter{font-size:calc(9.5px * var(--ts));color:var(--ink-soft);margin-top:1px}
+  .badge{display:inline-block;font-size:calc(9px * var(--ts));padding:1px 5px;border-radius:5px;background:#EFE9DC;color:var(--ink-soft)}
+  #turnInfo{font-size:calc(10.5px * var(--ts));color:var(--ink-soft);text-align:right;white-space:nowrap}
+  #bar-progress{height:4px;background:#EFE9DC;border-radius:2px;margin:7px 0 6px;overflow:hidden}
+  #bar-fill{height:100%;width:0;background:var(--teal);border-radius:2px;transition:width .3s}
+
+  .players{display:flex;flex-direction:column;gap:3px}
+  .pcard{display:grid;grid-template-columns:16px 9px minmax(46px,auto) repeat(4,1fr);
+         align-items:center;gap:4px;padding:3px 6px;border-radius:8px;
+         background:#FAF7F0;border:1.5px solid transparent;font-size:calc(10px * var(--ts));line-height:1.15}
+  .pcard.active{border-color:var(--gold);background:#FFF9E6}
+  .pcard.dead{opacity:.35}
+  .pcard.dead .pname{text-decoration:line-through}
+  .pcard .rank{font-size:calc(9px * var(--ts));font-weight:800;color:#9A9184;text-align:center}
+  .pcard.me .rank{color:var(--teal)}
+  .dot{width:9px;height:9px;border-radius:50%}
+  .pname{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pm{display:flex;flex-direction:column;align-items:flex-end;font-variant-numeric:tabular-nums}
+  .pm i{font-style:normal;font-size:calc(8px * var(--ts));color:#A39887;letter-spacing:0}
+  .pm b{font-size:calc(10px * var(--ts));font-weight:700}
+  .pm.debt b{color:var(--red)}
+  .pm.neg b{color:var(--red)}
+  .pm.pos b{color:var(--green)}
+
+  #policy{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .chip{font-size:calc(9px * var(--ts));padding:2px 6px;border-radius:6px;background:#FDE7E4;color:var(--red);font-weight:700;cursor:pointer}
+  .chip.info{background:#E6F0EC;color:var(--teal)}
+  #legacy{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;min-height:11px}
+  .chip.legacy{background:#EDE7DC;color:#6B6156}
+  .chip.legacy:hover{background:#E2D9C8}
+  .chip.legacy.empty{opacity:.6;background:#F2EDE3}
+
+  /* ============ 棋盘 ============ */
+  #boardOuter{position:relative;width:var(--board,100%);max-width:100%;aspect-ratio:1/1;
+              border:2px solid var(--line);border-radius:18px;background:#fff;
+              box-shadow:0 2px 0 var(--line);overflow:hidden}
+  #boardWrap{position:relative;width:100%;height:100%;min-width:0;min-height:0}
+  .ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+        border:1.5px dashed #E6DCC8;border-radius:50%}
+  .ring.r1{width:62%;height:62%}
+  .ring.r2{width:38%;height:38%;border-style:dotted}
+  .oldring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+           border:1.5px dotted #DCCFB6;border-radius:50%;pointer-events:none}
+  .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;color:#B9AC95;pointer-events:none}
+  .core b{display:block;font-size:calc(19px * var(--ts));letter-spacing:3px;color:#CFC2A8}
+  .core span{font-size:calc(8.5px * var(--ts));letter-spacing:1px}
+
+  #boardTools{position:absolute;right:8px;bottom:8px;display:flex;gap:4px;z-index:20}
+  #boardTools button{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);
+    background:rgba(255,255,255,.92);color:var(--ink-soft);font-size:calc(13px * var(--ts));font-weight:800;
+    line-height:1;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+  #boardTools button:active{transform:translateY(1px)}
+
+  .cell{position:absolute;width:var(--cell);height:var(--cell);transform:translate(-50%,-50%);
+        border-radius:11px;background:#fff;border:2px solid var(--line);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;
+        font-size:calc(8px * var(--ts));line-height:1.1;cursor:pointer;overflow:hidden;
+        transition:transform .12s, box-shadow .12s}
+  .cell .nm{font-weight:700;text-align:center;padding:0 1px}
+  .cell .lv{font-size:calc(7px * var(--ts));color:var(--gold);height:8px;letter-spacing:-1px}
+  /* 功能格：深色底 + 白字（V1.8） */
+  .cell.special{background:#2A2420;color:#fff;border-color:#141010;font-size:calc(9px * var(--ts))}
+  .cell.special .nm{color:#fff}
+  .cell.jail{background:#3B2A44;border-color:#241A2B;color:#EDE7F3}
+  .cell.scenic{background:#1F3B2C;border-color:#12251B;color:#DFF3E6}
+  .cell.shop{background:#3A2A14;border-color:#241A0D;color:#FBE9C8}
+  .cell.stock{background:#132C3A;border-color:#0B1A23;color:#D8EEF7}
+  .cell.locked{background:#F0EBE1;color:#B5A99A;border-style:dashed}
+  .cell.broken{background:#F3E7E5;border-color:#D9B8B3;color:#A5797A}
+  .cell.owned{box-shadow:inset 0 0 0 3px var(--owner,#ccc)}
+  .cell .bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:transparent}
+
+  /* 棋子 */
+  .token{position:absolute;transform:translate(-50%,-50%);z-index:6;
+         width:calc(var(--cell,44px) * .66);height:calc(var(--cell,44px) * .66);
+         display:flex;align-items:center;justify-content:center;pointer-events:none;
+         font-size:calc(var(--cell,44px) * .60);line-height:1;
+         text-shadow:0 1px 0 #fff,0 0 4px rgba(255,255,255,.95),0 2px 4px rgba(0,0,0,.3);
+         transition:left .16s ease,top .16s ease}
+  .token.active{animation:bob .9s ease-in-out infinite;
+         filter:drop-shadow(0 4px 3px rgba(0,0,0,.35))}
+  @keyframes bob{
+    0%,100%{transform:translate(-50%,-50%)}
+    50%{transform:translate(-50%,calc(-50% - 3px))}
+  }
+
+  /* ============ K 线栏 ============ */
+  #kline{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 10px;
+         box-shadow:0 2px 0 var(--line)}
+  .k-head{display:flex;align-items:baseline;gap:7px;margin-bottom:5px}
+  .k-head b{font-size:calc(11.5px * var(--ts))}
+  #kPrice{font-size:calc(15px * var(--ts));font-weight:800;font-variant-numeric:tabular-nums}
+  #kDiff{font-size:calc(10px * var(--ts));font-variant-numeric:tabular-nums}
+  #kDiff.up{color:#C0392B} #kDiff.down{color:#1B7A3E}
+  #kMetaChip{margin-left:auto;font-size:calc(9px * var(--ts));color:var(--ink-soft)}
+  #kChart{display:block;width:100%;height:104px;background:#FBFAF6;border-radius:8px}
+  .k-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:6px;font-size:calc(9.5px * var(--ts))}
+  .k-foot div{display:flex;flex-direction:column;background:#FAF7F0;border-radius:7px;padding:3px 5px}
+  .k-foot i{font-style:normal;font-size:calc(8.5px * var(--ts));color:#A39887}
+  .k-foot b{font-size:calc(11px * var(--ts));font-variant-numeric:tabular-nums}
+  .k-foot b.pos{color:var(--green)} .k-foot b.neg{color:var(--red)}
+
+  /* 道具条 */
+  #items{display:flex;gap:5px}
+  #items .item{flex:1;display:flex;flex-direction:column;align-items:center;gap:0;
+    background:#fff;border:2px solid var(--line);border-radius:10px;padding:3px 2px 2px;
+    color:var(--ink);cursor:pointer;box-shadow:0 2px 0 var(--line);line-height:1.15}
+  #items .item .ic{font-size:calc(12px * var(--ts));line-height:1}
+  #items .item b{font-size:calc(11px * var(--ts));font-variant-numeric:tabular-nums}
+  #items .item .nm{font-size:calc(8px * var(--ts));color:var(--ink-soft)}
+  #items .item.off{opacity:.35;box-shadow:none;cursor:not-allowed}
+  #items .item:active:not(.off){transform:translateY(2px);box-shadow:0 0 0 var(--line)}
+
+  /* 连片特效 */
+  .chainlink{position:absolute;height:6px;border-radius:3px;transform-origin:0 50%;
+    margin-top:-3px;opacity:.9;z-index:4;pointer-events:none;box-shadow:0 0 6px 1px currentColor}
+  .cell.chain{animation:chainPulse 2.2s ease-in-out infinite}
+  @keyframes chainPulse{
+    0%,100%{box-shadow:inset 0 0 0 3px var(--owner,#ccc)}
+    50%{box-shadow:inset 0 0 0 3px var(--owner,#ccc),0 0 9px 1px var(--owner,#ccc)}
+  }
+  .cell.blocked::after{content:"⛔";position:absolute;right:0;top:-2px;font-size:calc(10px * var(--ts));line-height:1}
+  .cell.chain[data-chain]::before{content:attr(data-chain);position:absolute;left:-3px;top:-6px;
+    font-size:calc(8px * var(--ts));font-weight:700;line-height:1;padding:1px 3px;border-radius:5px;
+    background:var(--owner,#999);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);z-index:3}
+  .chainlink::before,.chainlink::after{content:"";position:absolute;top:50%;width:6px;height:6px;
+    margin-top:-3px;border-radius:50%;background:inherit}
+  .chainlink::before{left:-3px}
+  .chainlink::after{right:-3px}
+
+  /* 操作 */
+  #bar{display:flex;gap:7px}
+  #skill{width:78px;border:2px solid var(--line);border-radius:13px;background:#fff;
+    font-size:calc(11px * var(--ts));font-weight:700;color:var(--ink-soft);cursor:pointer;
+    box-shadow:0 3px 0 var(--line);line-height:1.2;padding:4px 2px}
+  #skill small{display:block;font-size:calc(8.5px * var(--ts));font-weight:400;color:#9A9184}
+  #skill.ready{background:#FFF4D6;border-color:var(--gold);color:#7A5C00;box-shadow:0 3px 0 #9E7F14}
+  #skill:hover{border-color:var(--gold)}
+  #skill.off{opacity:.55;cursor:not-allowed}
+  #roll{flex:1;padding:12px;border:none;border-radius:13px;background:var(--teal);color:#fff;
+        font-size:calc(16px * var(--ts));font-weight:700;letter-spacing:2px;cursor:pointer;box-shadow:0 3px 0 #1F5A50;
+        transition:transform .06s}
+  #roll:active{transform:translateY(2px);box-shadow:0 1px 0 #1F5A50}
+  #roll:disabled{background:#B9C4C0;box-shadow:0 3px 0 #9AA5A1;cursor:not-allowed}
+  #roll small{display:block;font-size:calc(10px * var(--ts));font-weight:400;letter-spacing:0;opacity:.85;margin-top:2px}
+  #menu{width:52px;border:2px solid var(--line);border-radius:13px;background:#fff;
+        font-size:calc(11px * var(--ts));font-weight:700;color:var(--ink-soft);cursor:pointer;box-shadow:0 3px 0 var(--line)}
+
+  /* 日志 */
+  #logWrap{position:relative}
+  #log{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 10px;
+       height:200px;overflow-y:auto;font-size:calc(11px * var(--ts));line-height:1.6;box-shadow:0 2px 0 var(--line);
+       scroll-behavior:auto}
+  #log p.sep{display:flex;align-items:center;gap:6px;color:#B5A99A;font-size:calc(9.5px * var(--ts));
+             margin:7px 0 3px;line-height:1.3}
+  #log p.sep::before,#log p.sep::after{content:"";flex:1;height:1px;
+             background:repeating-linear-gradient(to right,#DDD2BE 0 3px,transparent 3px 6px)}
+  #logJump{position:absolute;right:12px;bottom:10px;border:none;border-radius:12px;
+           background:rgba(42,36,32,.82);color:#fff;font-size:calc(10px * var(--ts));padding:4px 9px;
+           cursor:pointer;display:none;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+  #logJump.show{display:block}
+  #log p{margin-bottom:2px;color:var(--ink-soft)}
+  #log p b{color:var(--ink)}
+  #log p.good{color:var(--green)}
+  #log p.bad{color:var(--red)}
+  #log p.sys{color:#6B4E9B;font-weight:700}
+
+  /* 弹窗 */
+  #modal{position:fixed;inset:0;background:rgba(42,36,32,.55);display:flex;align-items:center;
+         justify-content:center;padding:16px;z-index:50}
+  #modal.hidden{display:none}
+  .sheet{background:#fff;border-radius:18px;padding:16px;width:100%;max-width:360px;
+         border:2px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.2);max-height:90vh;overflow-y:auto}
+  .sheet h3{font-size:calc(16px * var(--ts));margin-bottom:4px}
+  .sheet .sub{font-size:calc(11px * var(--ts));color:var(--ink-soft);margin-bottom:8px;line-height:1.55}
+  .kv{display:flex;justify-content:space-between;font-size:calc(12px * var(--ts));padding:3px 0;border-bottom:1px dashed #EDE5D6}
+  .kv:last-of-type{border:none}
+  .kv b{font-variant-numeric:tabular-nums}
+  .warn{font-size:calc(10.5px * var(--ts));color:var(--red);margin-top:8px;min-height:14px;line-height:1.4}
+  .btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .btns button{flex:1;min-width:86px;padding:11px;border-radius:11px;border:none;font-size:calc(14px * var(--ts));
+               font-weight:700;cursor:pointer;transition:transform .06s}
+  .btns button:active{transform:translateY(2px)}
+  .btn-main{background:var(--teal);color:#fff;box-shadow:0 3px 0 #1F5A50}
+  .btn-sub{background:#EFE9DC;color:var(--ink);box-shadow:0 3px 0 #D8CDBB}
+  .btn-gold{background:var(--gold);color:#3A2E00;box-shadow:0 3px 0 #9E7F14}
+  .btn-red{background:#C0392B;color:#fff;box-shadow:0 3px 0 #8E2A20}
+  .btns button:disabled{background:#D9D2C4;color:#9A9184;box-shadow:0 3px 0 #C4BCAC;cursor:not-allowed}
+
+  /* 商店 */
+  .shop-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #EDE5D6}
+  .shop-row .ic{font-size:calc(17px * var(--ts));width:22px;text-align:center}
+  .shop-row .tx{flex:1;line-height:1.35}
+  .shop-row .tx b{font-size:calc(12.5px * var(--ts))}
+  .shop-row .tx span{display:block;font-size:calc(10px * var(--ts));color:var(--ink-soft)}
+  .shop-row button{padding:7px 11px;border-radius:9px;border:none;font-size:calc(12px * var(--ts));font-weight:700;
+                   background:var(--teal);color:#fff;cursor:pointer;box-shadow:0 2px 0 #1F5A50}
+  .shop-row button:disabled{background:#D9D2C4;color:#9A9184;box-shadow:0 2px 0 #C4BCAC;cursor:not-allowed}
+
+  /* 开局选择 */
+  .pick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+  .pickbtn{background:#FAF7F0;border:2px solid var(--line);border-radius:10px;padding:7px 4px;
+           display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:calc(10px * var(--ts))}
+  .pickbtn b{font-size:calc(12px * var(--ts))}
+  .pickbtn span{font-size:calc(9px * var(--ts));color:var(--ink-soft)}
+  .pickbtn.on{border-color:var(--teal);background:#EAF3F0;box-shadow:0 0 0 2px #2E7D6F22}
+
+  .toast{position:fixed;left:50%;top:12%;transform:translateX(-50%);background:rgba(42,36,32,.92);
+         color:#fff;padding:9px 16px;border-radius:20px;font-size:calc(13px * var(--ts));z-index:80;opacity:0;
+         transition:opacity .25s;pointer-events:none;max-width:82%;text-align:center;line-height:1.45}
+  .toast.show{opacity:1}
+
+  .rank-row{display:flex;justify-content:space-between;font-size:calc(13px * var(--ts));padding:6px 0;border-bottom:1px dashed #EDE5D6}
+  .rank-row b{font-variant-numeric:tabular-nums}
+  .medal{font-size:calc(14px * var(--ts));margin-right:4px}
+
+  .ev{display:flex;gap:8px;font-size:calc(11px * var(--ts));padding:4px 0;border-bottom:1px dashed #EDE5D6;line-height:1.45}
+  .ev:last-child{border-bottom:none}
+  .ev .ev-n{font-weight:700;white-space:nowrap;color:var(--ink);min-width:62px}
+  .ev .ev-d{color:#6B6156}
+
+  #tip{position:fixed;left:8px;right:8px;top:0;z-index:9999;background:#2A2420;color:#fff;
+       font-size:calc(11.5px * var(--ts));line-height:1.55;padding:10px 12px;border-radius:11px;
+       box-shadow:0 8px 22px rgba(0,0,0,.3);pointer-events:none;opacity:0;transition:opacity .12s}
+  #tip.show{opacity:1}
+  #tip b{display:block;font-size:calc(12.5px * var(--ts));margin-bottom:2px}
+  #tip .t-meta{color:#C9BFAE;font-size:calc(10.5px * var(--ts));margin-bottom:5px}
+  #tip div{white-space:normal}
+
+  #foot{text-align:center;font-size:calc(10px * var(--ts));color:#9A9184;line-height:1.6;padding:2px 0 6px}
+  #foot a{color:#9A9184;text-decoration:none;border-bottom:1px dotted #C4BCAC;margin:0 3px}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="boardCol">
+  <div id="boardOuter">
+    <div id="boardWrap">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="core"><b>杭州</b><span>2010 — 2026</span></div>
+    </div>
+    <div id="boardTools">
+      <button id="zoomOut" title="缩小棋盘">−</button>
+      <button id="zoomIn" title="放大棋盘">+</button>
+    </div>
+  </div>
+  </div>
+
+  <div id="sideCol">
+
+  <header id="hud">
+    <div class="hud-top">
+      <div>
+        <div id="date">2010 年 1 月</div>
+        <div id="chapter">第一章 · 限购前夜　<span class="badge">2010 — 2013</span></div>
+      </div>
+      <div id="turnInfo">第 1 / 48 月</div>
+    </div>
+    <div id="bar-progress"><div id="bar-fill"></div></div>
+    <div class="players" id="players"></div>
+    <div id="policy"></div>
+    <div id="legacy"></div>
+  </header>
+
+  <section id="kline">
+    <div class="k-head">
+      <b>杭州楼市指数</b>
+      <span id="kPrice">1000</span>
+      <span id="kDiff">—</span>
+      <span id="kMetaChip">每手 100 股</span>
+    </div>
+    <svg id="kChart" viewBox="0 0 640 208" preserveAspectRatio="none"></svg>
+    <div class="k-foot">
+      <div><i>持仓</i><b id="kLots">0 手</b></div>
+      <div><i>市值</i><b id="kValue">0 万</b></div>
+      <div><i>成本</i><b id="kCost">0 万</b></div>
+      <div><i>盈亏</i><b id="kPnl">—</b></div>
+    </div>
+  </section>
+
+  <div id="items"></div>
+
+  <div id="bar">
+    <button id="skill" style="display:none">技能</button>
+    <button id="roll">选择角色开始</button>
+    <button id="menu">菜单</button>
+  </div>
+
+  <div id="logWrap">
+    <div id="log"></div>
+    <button id="logJump">↓ 最新</button>
+  </div>
+
+  <footer id="foot">
+    <a href="./privacy.html">隐私政策</a>·<a href="./terms.html">用户协议</a><br>
+    虚构作品，数值均为游戏设定，不构成任何投资建议
+  </footer>
+  </div>
+</div>
+
+<div id="modal" class="hidden"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+<div id="tip"></div>
+
+<!-- [PRD 10.3] 配置文件：整局只在这里读一次，之后全部读内存 -->
+<link rel="stylesheet" href="art.css?v=1.10.0">
+<script src="art.js?v=1.10.0"></script>
+<script src="config.js?v=1.10.0"></script>
+<script src="data.js?v=1.10.0"></script>
+<script src="game.js?v=1.10.0"></script>
+</body>
+</html>

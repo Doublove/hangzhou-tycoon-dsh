@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<title>杭州大富翁 · 美术板</title>
+<style>
+body{margin:0;padding:28px;background:#0E0E14;color:#EDEDF2;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+h1{font-size:20px;letter-spacing:.04em;margin:0 0 4px}
+h2{font-size:12px;letter-spacing:.18em;color:#8C8C9A;margin:34px 0 12px;font-family:ui-monospace,monospace;text-transform:uppercase}
+.sub{color:#8C8C9A;font-size:12px;line-height:1.7;max-width:760px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;background:#17171F;border:1px solid #2C2C38;border-bottom:4px solid #07070B;border-radius:3px;padding:14px 12px 10px;min-width:104px}
+.col b{font-size:10.5px;color:#C9C9D6;font-weight:600}
+.big{width:96px;height:120px}
+.mini{width:44px;height:50px}
+.cellstone{position:relative;width:44px;height:44px;border-radius:50%;border:1.5px solid #7A5426;
+  background:radial-gradient(circle at 35% 28%,#FFFDF6,#E7DEC8 62%,#C9BFA6);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;overflow:hidden}
+.cellstone svg{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);width:24px;height:28px}
+.cellstone .nm{font-size:6px;background:rgba(255,255,255,.72);color:#2A2420;padding:0 2px;border-radius:2px;position:relative}
+.mapbox{background:#17171F;border:1px solid #2C2C38;border-bottom:4px solid #07070B;border-radius:3px;padding:10px;text-align:center}
+.map{width:196px;height:196px;border-radius:50%;overflow:hidden;
+  background:radial-gradient(ellipse at 30% 18%,rgba(255,255,255,.32),transparent 55%),linear-gradient(160deg,#E2C08A,#B98B4E 62%,#A87A3F);
+  border:1px solid #7A5426}
+.mapbox b{display:block;margin-top:8px;font-size:10.5px;color:#C9C9D6}
+</style></head><body>
+<h1>杭州大富翁 · 美术板</h1>
+<p class="sub">建筑按等级给出体量差异，配色随所属区域/玩家变化；地铁图是拓扑示意，不画行政边界、不标经纬度（合规要求见需求文档 3.9 / 13.1）。</p>
+<h2>地块建筑 · 五级立面</h2>
+<div class="row">
+  <div class="col">
+    <div class="big"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="glc5s39" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <polygon points="2,16 12,9 22,16" fill="#90714a"/>
+        <polygon points="12,9 22,16 20.4,16 12,10.6" fill="#b49062" opacity=".55"/>
+        <rect x="4" y="16" width="16" height="13.4" fill="#E4DCCB"/>
+        <rect x="15.4" y="16" width="4.6" height="13.4" fill="#c3a682" opacity=".55"/>
+        <rect x="6.2" y="18.4" width="4.2" height="4" fill="#5C6B77"/>
+        <rect x="6.2" y="18.4" width="4.2" height="1.6" fill="#9FC3D8" opacity=".8"/>
+        <rect x="9.4" y="24.4" width="5.2" height="5" fill="#725a3b"/>
+        <rect x="14.6" y="18.6" width="3.2" height="3.4" fill="#5C6B77" opacity=".8"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#glc5s39)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <div class="mini"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gpesk0z" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <polygon points="2,16 12,9 22,16" fill="#90714a"/>
+        <polygon points="12,9 22,16 20.4,16 12,10.6" fill="#b49062" opacity=".55"/>
+        <rect x="4" y="16" width="16" height="13.4" fill="#E4DCCB"/>
+        <rect x="15.4" y="16" width="4.6" height="13.4" fill="#c3a682" opacity=".55"/>
+        <rect x="6.2" y="18.4" width="4.2" height="4" fill="#5C6B77"/>
+        <rect x="6.2" y="18.4" width="4.2" height="1.6" fill="#9FC3D8" opacity=".8"/>
+        <rect x="9.4" y="24.4" width="5.2" height="5" fill="#725a3b"/>
+        <rect x="14.6" y="18.6" width="3.2" height="3.4" fill="#5C6B77" opacity=".8"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gpesk0z)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <b>Lv1 单间平房</b>
+  </div>
+  <div class="col">
+    <div class="big"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g13u525" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="3.4" y="7.4" width="17.2" height="22" fill="#E4DCCB"/>
+        <rect x="15.6" y="7.4" width="5" height="22" fill="#c3a682" opacity=".5"/>
+        <rect x="3" y="6.4" width="18" height="2" fill="#90714a"/>
+        <rect x="5.84" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="8.74" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="11.64" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="14.54" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/>
+        <rect x="5.84" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="8.74" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="11.64" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="14.54" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/>
+        <rect x="3" y="16.4" width="18" height="1.2" fill="#c3a682" opacity=".35"/>
+        <rect x="9.6" y="25.4" width="4.8" height="4" fill="#7b613f"/>
+        <rect x="3.4" y="29.2" width="17.2" height=".8" fill="#90714a" opacity=".5"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g13u525)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <div class="mini"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g8o3mx2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="3.4" y="7.4" width="17.2" height="22" fill="#E4DCCB"/>
+        <rect x="15.6" y="7.4" width="5" height="22" fill="#c3a682" opacity=".5"/>
+        <rect x="3" y="6.4" width="18" height="2" fill="#90714a"/>
+        <rect x="5.84" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="8.74" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="11.64" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="14.54" y="11.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/>
+        <rect x="5.84" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="8.74" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="11.64" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/><rect x="14.54" y="19.32" width="1.62" height="3.14" fill="#5C6B77" opacity=".55"/>
+        <rect x="3" y="16.4" width="18" height="1.2" fill="#c3a682" opacity=".35"/>
+        <rect x="9.6" y="25.4" width="4.8" height="4" fill="#7b613f"/>
+        <rect x="3.4" y="29.2" width="17.2" height=".8" fill="#90714a" opacity=".5"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g8o3mx2)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <b>Lv2 两层平房</b>
+  </div>
+  <div class="col">
+    <div class="big"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gxmb3b3" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#785e3d"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#90714a" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#90714a"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#b8966b" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#c3a682"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#c3a682" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#6a5336"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gxmb3b3)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <div class="mini"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gkds1fq" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#785e3d"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#90714a" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#c3a682" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#90714a" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#90714a"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#b8966b" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#c3a682"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#c3a682" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#6a5336"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gkds1fq)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <b>Lv3 公寓楼</b>
+  </div>
+  <div class="col">
+    <div class="big"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gqd0ejt" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4.6" y="27.4" width="16" height="2.2" fill="#6a5336"/>
+        <rect x="5" y="3.2" width="14" height="24.4" fill="#9FC3D8"/>
+        <rect x="5" y="4" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="7.1" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="4" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="7.3" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="10.4" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="7.3" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="10.6" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="13.7" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="10.6" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="13.899999999999999" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="17" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="13.899999999999999" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="17.2" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="20.3" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="17.2" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="20.5" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="23.6" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="20.5" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="23.799999999999997" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="26.9" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="23.799999999999997" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/>
+        <rect x="4.4" y="2.4" width="15.2" height="1.4" fill="#90714a"/>
+        <rect x="12.4" y=".6" width="1" height="1.9" fill="#c3a682"/>
+        <rect x="7.6" y="24.4" width="8.8" height="3" fill="#7f6341"/>
+        <rect x="9" y="25.6" width="5.8" height="1.7" fill="#9FC3D8" opacity=".75"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gqd0ejt)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <div class="mini"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="ghx3gmd" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4.6" y="27.4" width="16" height="2.2" fill="#6a5336"/>
+        <rect x="5" y="3.2" width="14" height="24.4" fill="#9FC3D8"/>
+        <rect x="5" y="4" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="4" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="7.1" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="4" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="7.3" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="7.3" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="10.4" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="7.3" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="10.6" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="10.6" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="13.7" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="10.6" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="13.899999999999999" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="13.899999999999999" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="17" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="13.899999999999999" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="17.2" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="17.2" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="20.3" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="17.2" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="20.5" width="14" height="3.3" fill="#9FC3D8" opacity="0.47"/><rect x="5.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="20.5" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="23.6" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="20.5" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/><rect x="5" y="23.799999999999997" width="14" height="3.3" fill="#9FC3D8" opacity="0.35"/><rect x="5.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="7.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="9.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="11.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="13.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="15.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="17.6" y="23.799999999999997" width=".34" height="3.3" fill="#FFFFFF" opacity=".38"/><rect x="5" y="26.9" width="14" height=".35" fill="#FFFFFF" opacity=".5"/><rect x="15.6" y="23.799999999999997" width="3.4" height="3.3" fill="#c3a682" opacity=".3"/>
+        <rect x="4.4" y="2.4" width="15.2" height="1.4" fill="#90714a"/>
+        <rect x="12.4" y=".6" width="1" height="1.9" fill="#c3a682"/>
+        <rect x="7.6" y="24.4" width="8.8" height="3" fill="#7f6341"/>
+        <rect x="9" y="25.6" width="5.8" height="1.7" fill="#9FC3D8" opacity=".75"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#ghx3gmd)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <b>Lv4 写字楼</b>
+  </div>
+  <div class="col">
+    <div class="big"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g4svmvq" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#9e7c51"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#c3a682" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#665034"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#58452d" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#e1d3c0" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#90714a"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#d4bfa4" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g4svmvq)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <div class="mini"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g63lqoy" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#9e7c51"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#c3a682" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#665034"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#58452d" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#e1d3c0" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#90714a"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#d4bfa4" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g63lqoy)" opacity=".5" pointer-events="none"/>
+    </svg></div>
+    <b>Lv5 商业综合体</b>
+  </div></div>
+<h2>同等级 · 不同区搭配色</h2>
+<div class="row">
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gmhowo0" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#1f554b"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#609c92" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#26675b" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#609c92" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#26675b" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#609c92" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#26675b" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#609c92" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#26675b" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#609c92" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#26675b" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#26675b"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#438a7d" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#609c92"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#609c92" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#1c4b43"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gmhowo0)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">西湖边</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="grm39s1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#297164"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#609c92" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#1b4940"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#173f38" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#b0cec8" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#26675b"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#8cb8b0" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#grm39s1)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">西湖边</span></div>
+  </div>
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gqjmu9b" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#493569"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#8f78b3" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#58407f" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#8f78b3" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#58407f" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#8f78b3" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#58407f" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#8f78b3" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#58407f" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#8f78b3" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#58407f" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#58407f"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#7a60a5" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#8f78b3"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#8f78b3" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#402f5d"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gqjmu9b)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城西</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gspjf3f" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#60468c"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#8f78b3" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#3e2d5a"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#36274e" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#c7bcd9" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#58407f"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#ae9ec8" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gspjf3f)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城西</span></div>
+  </div>
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gzf6h2p" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#604b43"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#a89188" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#745a51" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#a89188" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#745a51" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#a89188" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#745a51" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#a89188" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#745a51" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#a89188" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#745a51" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#745a51"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#987d73" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#a89188"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#a89188" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#55423b"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gzf6h2p)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城北</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gr5f749" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#7f6359"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#a89188" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#524039"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#473732" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#d4c8c4" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#745a51"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#c0afa9" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gr5f749)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城北</span></div>
+  </div>
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="goow88n" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#124172"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#5285bd" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#164e8a" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#5285bd" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#164e8a" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#5285bd" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#164e8a" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#5285bd" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#164e8a" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#5285bd" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#164e8a" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#164e8a"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#326fb1" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#5285bd"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#5285bd" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#103965"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#goow88n)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城东</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g5qp871" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#185697"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#5285bd" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#103761"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#0e3054" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#a8c2de" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#164e8a"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#82a7cf" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g5qp871)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">城东</span></div>
+  </div>
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="g0mlmc6" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#84103e"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#d14f82" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#9f144b" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#d14f82" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#9f144b" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#d14f82" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#9f144b" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#d14f82" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#9f144b" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#d14f82" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#9f144b" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#9f144b"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#c82f6b" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#d14f82"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#d14f82" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#740e37"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#g0mlmc6)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">滨江</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gc2xc8l" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#af1652"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#d14f82" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#710e35"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#610c2e" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#e8a7c1" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#9f144b"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#dd80a5" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gc2xc8l)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">滨江</span></div>
+  </div>
+  <div class="col">
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="gtosozq" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="4" y="28" width="17" height="1.6" fill="#00473f"/>
+        <rect x="4.6" y="6.4" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="7.70" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="6.800000000000001" width="5" height="3.6" fill="#3d8d83" opacity=".42"/><rect x="15.8" y="6.800000000000001" width=".6" height="3.6" fill="#00564b" opacity=".5"/><rect x="4.6" y="10.8" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="12.10" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="11.200000000000001" width="5" height="3.6" fill="#3d8d83" opacity=".42"/><rect x="15.8" y="11.200000000000001" width=".6" height="3.6" fill="#00564b" opacity=".5"/><rect x="4.6" y="15.200000000000001" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="16.50" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="15.600000000000001" width="5" height="3.6" fill="#3d8d83" opacity=".42"/><rect x="15.8" y="15.600000000000001" width=".6" height="3.6" fill="#00564b" opacity=".5"/><rect x="4.6" y="19.6" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="20.90" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="20" width="5" height="3.6" fill="#3d8d83" opacity=".42"/><rect x="15.8" y="20" width=".6" height="3.6" fill="#00564b" opacity=".5"/><rect x="4.6" y="24" width="14.8" height="4.4" fill="#E4DCCB"/><rect x="5.77" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="8.37" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="10.97" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="13.57" y="25.30" width="1.46" height="1.68" fill="#5C6B77" opacity=".55"/><rect x="14.4" y="24.4" width="5" height="3.6" fill="#3d8d83" opacity=".42"/><rect x="15.8" y="24.4" width=".6" height="3.6" fill="#00564b" opacity=".5"/>
+        <rect x="3.8" y="5" width="17" height="2" fill="#00564b"/>
+        <rect x="3.8" y="5" width="17" height=".7" fill="#1a786c" opacity=".7"/>
+        <rect x="6" y="2.6" width="4.6" height="2.6" fill="#3d8d83"/>
+        <rect x="13" y="3.2" width="2.4" height="2" fill="#3d8d83" opacity=".8"/>
+        <rect x="9.8" y="25.6" width="3.4" height="2.4" fill="#003f37"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#gtosozq)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">钱江新城</span></div>
+    <div class="cellstone"><svg class="bld-svg" viewBox="0 0 24 32" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <defs><linearGradient id="ghjl87h" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient></defs>
+      <ellipse cx="12" cy="30.6" rx="9.4" ry="1.9" fill="#000" opacity=".26"/>
+        <rect x="1.6" y="19.2" width="21" height="10.4" fill="#005f53"/>
+        <rect x="16" y="19.2" width="6.6" height="10.4" fill="#3d8d83" opacity=".45"/>
+        <rect x="2.6" y="21.2" width="17.6" height="3.6" fill="#9FC3D8" opacity=".55"/>
+        <rect x="2.6" y="25.6" width="5.4" height="3.2" fill="#003d35"/>
+        <rect x="9.4" y="26" width="4.4" height="2.8" fill="#00352e" opacity=".85"/>
+        <rect x="8.4" y="3.8" width="10.4" height="15.6" fill="#9FC3D8"/>
+        <rect x="9.6" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="11.5" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="13.399999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="15.299999999999999" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="17.2" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/><rect x="19.1" y="4" width=".3" height="15.4" fill="#FFF" opacity=".35"/>
+        <rect x="8.4" y="3.8" width="10.4" height="1.2" fill="#9ec6c1" opacity=".5"/>
+        <rect x="8" y="2.6" width="11.2" height="1.4" fill="#00564b"/>
+        <rect x="9" y="1.2" width="9.2" height="1.5" fill="#73ada5" opacity=".9"/>
+        <rect x="10.6" y=".4" width="6" height=".9" fill="#FFF" opacity=".85"/>
+        <rect x="12.4" y="19.2" width="2.2" height=".7" fill="#FFF" opacity=".55"/>
+      <rect x="0" y="0" width="24" height="32" fill="url(#ghjl87h)" opacity=".5" pointer-events="none"/>
+    </svg><span class="nm">钱江新城</span></div>
+  </div></div>
+<h2>棋盘底图 · 各章结束年份的线网</h2>
+<div class="row">
+  <div class="mapbox"><div class="map"><svg class="metro-svg" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M8,68 L26,62 L44,56 L60,58 L74,66 L86,74" fill="none" stroke="#D33A2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="68" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="44" cy="56" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="60" cy="58" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="74" cy="66" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="86" cy="74" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><path d="M26,62 L30,44 L38,30 L50,22" fill="none" stroke="#2E7D6F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="30" cy="44" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="38" cy="30" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/></svg></div><b>2013</b></div>
+  <div class="mapbox"><div class="map"><svg class="metro-svg" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M8,68 L26,62 L44,56 L60,58 L74,66 L86,74" fill="none" stroke="#D33A2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="68" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="44" cy="56" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="60" cy="58" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="74" cy="66" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="86" cy="74" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><path d="M26,62 L30,44 L38,30 L50,22 L66,20" fill="none" stroke="#2E7D6F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="30" cy="44" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="38" cy="30" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="66" cy="20" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><path d="M18,34 L38,36 L56,34 L72,30 L88,26" fill="none" stroke="#1B5FA8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="18" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="38" cy="36" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="72" cy="30" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="88" cy="26" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><path d="M56,34 L58,50 L62,66 L70,80" fill="none" stroke="#B08A5A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="58" cy="50" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="62" cy="66" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="70" cy="80" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/></svg></div><b>2017</b></div>
+  <div class="mapbox"><div class="map"><svg class="metro-svg" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M8,68 L26,62 L44,56 L60,58 L74,66 L86,74" fill="none" stroke="#D33A2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="68" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="44" cy="56" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="60" cy="58" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="74" cy="66" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="86" cy="74" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><path d="M26,62 L30,44 L38,30 L50,22 L66,20" fill="none" stroke="#2E7D6F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="30" cy="44" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="38" cy="30" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="66" cy="20" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><path d="M18,34 L38,36 L56,34 L72,30 L88,26" fill="none" stroke="#1B5FA8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="18" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="38" cy="36" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="72" cy="30" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="88" cy="26" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><path d="M56,34 L58,50 L62,66 L70,80" fill="none" stroke="#B08A5A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="58" cy="50" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="62" cy="66" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="70" cy="80" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><path d="M12,48 L30,52 L48,50 L64,52 L82,48" fill="none" stroke="#8E44AD" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="12" cy="48" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="30" cy="52" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="48" cy="50" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="64" cy="52" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="82" cy="48" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><path d="M36,84 L44,70 L50,56 L52,40 L50,22" fill="none" stroke="#0F8B8D" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="36" cy="84" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="44" cy="70" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="50" cy="56" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="52" cy="40" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><path d="M70,80 L78,62 L84,44 L88,26" fill="none" stroke="#C9A227" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="70" cy="80" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="78" cy="62" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="84" cy="44" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="88" cy="26" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/></svg></div><b>2021</b></div>
+  <div class="mapbox"><div class="map"><svg class="metro-svg" viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path d="M8,68 L26,62 L44,56 L60,58 L74,66 L86,74" fill="none" stroke="#D33A2C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="8" cy="68" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="44" cy="56" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="60" cy="58" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="74" cy="66" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><circle cx="86" cy="74" r="1.5" fill="#F7F1E2" stroke="#D33A2C" stroke-width=".9" opacity=".9"/><path d="M26,62 L30,44 L38,30 L50,22 L66,20" fill="none" stroke="#2E7D6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="26" cy="62" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="30" cy="44" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="38" cy="30" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><circle cx="66" cy="20" r="1.5" fill="#F7F1E2" stroke="#2E7D6F" stroke-width=".9" opacity=".9"/><path d="M18,34 L38,36 L56,34 L72,30 L88,26" fill="none" stroke="#1B5FA8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="18" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="38" cy="36" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="72" cy="30" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><circle cx="88" cy="26" r="1.5" fill="#F7F1E2" stroke="#1B5FA8" stroke-width=".9" opacity=".9"/><path d="M56,34 L58,50 L62,66 L70,80" fill="none" stroke="#B08A5A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="56" cy="34" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="58" cy="50" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="62" cy="66" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><circle cx="70" cy="80" r="1.5" fill="#F7F1E2" stroke="#B08A5A" stroke-width=".9" opacity=".9"/><path d="M12,48 L30,52 L48,50 L64,52 L82,48" fill="none" stroke="#8E44AD" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="12" cy="48" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="30" cy="52" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="48" cy="50" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="64" cy="52" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><circle cx="82" cy="48" r="1.5" fill="#F7F1E2" stroke="#8E44AD" stroke-width=".9" opacity=".9"/><path d="M36,84 L44,70 L50,56 L52,40 L50,22" fill="none" stroke="#0F8B8D" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="36" cy="84" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="44" cy="70" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="50" cy="56" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="52" cy="40" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><circle cx="50" cy="22" r="1.5" fill="#F7F1E2" stroke="#0F8B8D" stroke-width=".9" opacity=".9"/><path d="M70,80 L78,62 L84,44 L88,26" fill="none" stroke="#C9A227" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="70" cy="80" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="78" cy="62" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="84" cy="44" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><circle cx="88" cy="26" r="1.5" fill="#F7F1E2" stroke="#C9A227" stroke-width=".9" opacity=".9"/><path d="M10,58 L24,74 L40,84 L58,84 L74,74 L84,56" fill="none" stroke="#E06C3A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="10" cy="58" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><circle cx="24" cy="74" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><circle cx="40" cy="84" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><circle cx="58" cy="84" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><circle cx="74" cy="74" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><circle cx="84" cy="56" r="1.5" fill="#F7F1E2" stroke="#E06C3A" stroke-width=".9" opacity=".9"/><path d="M30,52 L34,68 L40,84" fill="none" stroke="#4A6FA5" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/><circle cx="30" cy="52" r="1.5" fill="#F7F1E2" stroke="#4A6FA5" stroke-width=".9" opacity=".9"/><circle cx="34" cy="68" r="1.5" fill="#F7F1E2" stroke="#4A6FA5" stroke-width=".9" opacity=".9"/><circle cx="40" cy="84" r="1.5" fill="#F7F1E2" stroke="#4A6FA5" stroke-width=".9" opacity=".9"/></svg></div><b>2026</b></div></div>
+<p class="sub" style="margin-top:28px">这一页只用来走查矢量素材，不参与游戏运行。</p>
+</body></html>

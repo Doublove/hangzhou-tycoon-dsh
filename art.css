@@ -1,0 +1,468 @@
+/* ============================================================
+   杭州大富翁 · 视觉层样式（art.css）
+
+   设计取向参考 F1 官网：深色底、锐角面板、超细线、等宽数字、
+   一处高饱和强调色（红），信息密度高但不吵。
+   每个区块按功能换材质，底部统一「磁吸块」——深色托架 + 顶部强调条 + 四角螺钉。
+
+   区块与材质对照：
+     玩家栏   档案袋 / 卷宗        楼市指数  炒股终端
+     道具+技能 手机                掷骰      聚宝盆
+     菜单     字典（书脊）          日志      消费账单
+     棋盘     围棋盘                页面底    杭州卫星图
+   ============================================================ */
+
+:root{
+  --bg:#0E0E14; --panel:#17171F; --panel2:#1F1F29; --panel3:#262631;
+  --line:#2C2C38; --line2:#3A3A48;
+  --accent:#E10600; --accent2:#FF3B30;
+  --txt:#EDEDF2; --mute:#8C8C9A; --dim:#5E5E6E;
+  --up:#FF3B30; --down:#00C853;
+  --gold:#E8B44A; --gold-d:#8A6E12;
+  --folder:#C8A24A; --paper:#F4EFE3; --paper-ink:#241F1A;
+  --wood1:#E2C08A; --wood2:#B98B4E; --wood-ink:#4A3218;
+  --cell:44px;
+  --mag:4px;              /* 磁吸托架厚度 */
+  --r:3px;                /* F1 式锐角 */
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+}
+
+/* ---------------- 页面底：卫星图 + 压暗 ---------------- */
+body{
+  background:
+    linear-gradient(180deg, rgba(10,10,16,.82) 0%, rgba(10,10,16,.9) 45%, rgba(10,10,16,.96) 100%),
+    radial-gradient(120% 90% at 50% 0%, rgba(225,6,0,.10), transparent 60%),
+    url("assets/hangzhou-satellite.png") center/cover no-repeat fixed;
+  color:var(--txt);
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:repeating-linear-gradient(180deg, rgba(255,255,255,.028) 0 1px, transparent 1px 3px);
+  mix-blend-mode:overlay;
+}
+#app{position:relative; z-index:1}
+#foot{color:var(--dim)}
+#foot a{color:var(--mute); border-bottom-color:var(--line2)}
+
+/* ---------------- 磁吸托架（全场统一） ---------------- */
+#hud,#kline,#items,#bar,#logWrap,#boardOuter{
+  border:1.5px solid var(--line2);
+  border-bottom:var(--mag) solid #07070B;
+  border-radius:var(--r);
+  box-shadow:
+    0 10px 0 -6px rgba(0,0,0,.75),
+    0 14px 26px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+/* 四角螺钉 */
+#hud,#kline,#items,#logWrap{
+  background-image:
+    radial-gradient(circle at 10px calc(100% - var(--mag) - 7px), rgba(255,255,255,.16) 0 1.1px, transparent 1.4px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - var(--mag) - 7px), rgba(255,255,255,.16) 0 1.1px, transparent 1.4px);
+  background-repeat:no-repeat;
+}
+
+/* 区块标题条：细横线 + 大写标签 */
+.hud-top #date{
+  font-family:var(--mono); font-size:calc(17px * var(--ts)); letter-spacing:1px; color:#fff;
+}
+#chapter{color:var(--mute); font-size:calc(9px * var(--ts)); letter-spacing:.06em; text-transform:uppercase}
+.badge{background:var(--accent); color:#fff; font-weight:700; letter-spacing:.04em}
+#turnInfo{font-family:var(--mono); font-size:calc(10px * var(--ts)); color:var(--mute)}
+#bar-progress{background:#0A0A10; height:3px; border-radius:0}
+#bar-fill{background:linear-gradient(90deg,var(--accent),#FF6B5E); border-radius:0}
+
+/* ============================================================
+   1) 玩家栏 —— 档案袋 / 卷宗
+   ============================================================ */
+#hud{
+  position:relative; background:var(--panel);
+  padding:20px 10px 10px; border-radius:var(--r);
+}
+/* 卷宗标签 */
+#hud::before{
+  content:"玩家档案  ·  PLAYER DOSSIER";
+  position:absolute; left:-1.5px; top:-1.5px; height:16px; padding:0 12px 0 10px;
+  background:var(--folder); color:#241F0A;
+  font-family:var(--mono); font-size:calc(9px * var(--ts)); line-height:16px;
+  font-weight:700; letter-spacing:.08em;
+  border-radius:var(--r) 7px 0 0;
+  box-shadow:2px 2px 0 rgba(0,0,0,.45);
+}
+/* 回形针 */
+#hud::after{
+  content:""; position:absolute; right:14px; top:-7px; width:7px; height:22px;
+  border:2px solid #C9C4B6; border-radius:4px; opacity:.75;
+  border-bottom-color:transparent; transform:rotate(8deg);
+}
+.players{gap:2px}
+.pcard{
+  background:#12121A; border:1px solid var(--line); border-left:3px solid var(--line2);
+  border-radius:0; padding:4px 7px 4px 5px;
+  font-family:var(--mono); font-size:calc(10px * var(--ts));
+  transition:background .15s,border-color .15s;
+}
+.pcard.active{background:#1A1410; border-color:var(--gold); border-left-color:var(--gold)}
+.pcard.me{border-left-color:var(--accent)}
+.pcard .rank{color:var(--dim); font-weight:800}
+.pcard.me .rank{color:var(--accent)}
+.pm i{color:var(--dim); font-size:calc(7.5px * var(--ts)); letter-spacing:.04em}
+.pm b{color:#fff}
+.pm.debt b{color:var(--accent2)}
+.pm.pos b{color:var(--up)}
+.pm.neg b{color:var(--down)}
+.pcard.dead{opacity:.3}
+
+/* 政策 / 旧环 芯片：档案标签 */
+.chip{
+  background:#12121A; color:var(--accent2); border:1px solid #3A2020;
+  border-radius:2px; font-family:var(--mono); font-size:calc(8.5px * var(--ts)); letter-spacing:.02em;
+}
+.chip.info{background:#0F1A17; color:#38C8A8; border-color:#1E3A33}
+.chip.legacy{background:#17140E; color:#C8A24A; border-color:#3A2E14}
+.chip.legacy.empty{background:#12121A; color:var(--dim); border-color:var(--line)}
+
+/* ============================================================
+   2) 棋盘 —— 围棋盘
+   ============================================================ */
+#boardOuter{
+  background:
+    radial-gradient(ellipse at 30% 18%, rgba(255,255,255,.32), transparent 55%),
+    repeating-linear-gradient(90deg, rgba(74,50,24,.055) 0 2px, transparent 2px 6px),
+    linear-gradient(160deg, var(--wood1), var(--wood2) 62%, #A87A3F);
+  border-color:#7A5426;
+}
+/* 棋格线 + 五个星位 */
+#boardOuter::before{
+  content:""; position:absolute; inset:3.2%; pointer-events:none; z-index:0; opacity:.62;
+  /* 24 等分：格数固定，不随棋盘尺寸漂移 */
+  background-image:
+    linear-gradient(to right, rgba(74,50,24,.9) 0 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(74,50,24,.9) 0 1px, transparent 1px);
+  background-size:4.1667% 4.1667%;
+}
+#boardOuter::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.55;
+  background-image:
+    radial-gradient(circle 2.4px at 22% 22%, var(--wood-ink), transparent 3px),
+    radial-gradient(circle 2.4px at 78% 22%, var(--wood-ink), transparent 3px),
+    radial-gradient(circle 2.4px at 50% 50%, var(--wood-ink), transparent 3px),
+    radial-gradient(circle 2.4px at 22% 78%, var(--wood-ink), transparent 3px),
+    radial-gradient(circle 2.4px at 78% 78%, var(--wood-ink), transparent 3px);
+}
+#boardWrap{z-index:1}
+
+/* 地铁示意层 */
+#boardWrap .metro{
+  position:absolute; inset:0; pointer-events:none; z-index:0;
+  opacity:.42; filter:saturate(.85) contrast(.95);
+}
+.metro-svg{display:block}
+/* 线网别钻到中央卫星圆里去，否则中间一团乱麻 */
+#boardWrap .metro{
+  -webkit-mask-image:radial-gradient(circle at 50% 50%, transparent 0 17%, #000 23%);
+          mask-image:radial-gradient(circle at 50% 50%, transparent 0 17%, #000 23%);
+}
+/* 中央城市核心：卫星图裁圆 */
+.core{
+  z-index:2;                       /* 压在 metro 之上，否则线网会盖住卫星圆 */
+  width:34%; height:34%; border-radius:50%; overflow:hidden;
+  background-position:center; background-size:210%;
+  border:2px solid rgba(255,255,255,.5);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.7), 1px 2px 6px rgba(0,0,0,.5);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  color:#fff; text-shadow:0 1px 3px #000;
+}
+.core b{font-size:calc(var(--cell,44px) * .30); letter-spacing:.18em; color:#fff; opacity:.95}
+.core span{font-size:calc(var(--cell,44px) * .15); letter-spacing:.12em; opacity:.8; font-family:var(--mono)}
+
+/* 棋子 = 围棋子 */
+.cell{
+  overflow:hidden; border-radius:50%; width:var(--cell); height:var(--cell);
+  border:1.5px solid #7A5426;
+  background:radial-gradient(circle at 35% 28%, #FFFDF6, #E7DEC8 62%, #C9BFA6);
+  box-shadow:0 1px 2px rgba(0,0,0,.35), inset -1px -2px 3px rgba(0,0,0,.18);
+  justify-content:flex-end; padding-bottom:0;
+}
+.cell .nm{
+  position:relative; z-index:2;
+  font-size:calc(var(--cell) * .215); line-height:1.15; letter-spacing:-.01em; color:#2A2420;
+  background:rgba(255,255,255,.82); padding:0 2px; border-radius:2px;
+  max-width:calc(var(--cell) * .92); overflow:hidden; white-space:nowrap; text-overflow:ellipsis;
+}
+.cell .lv{
+  position:absolute; right:2px; bottom:2px; height:auto; z-index:3;
+  font-size:calc(var(--cell) * .13); line-height:1; letter-spacing:-.5px; color:#fff;
+  background:rgba(42,36,32,.72); border-radius:3px; padding:1px 2px;
+}
+.cell .bar{height:3px; border-radius:0 0 8px 8px}
+/* 建筑立面 */
+/* 建筑在内圈独立层，不占棋子 */
+.bldring{
+  position:absolute; transform:translate(-50%,-50%); pointer-events:none; z-index:1;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.45)) drop-shadow(0 0 1px rgba(0,0,0,.3));
+}
+.bldring .bld-svg{display:block; overflow:visible}
+.cell .bld-svg{display:block; overflow:visible}
+/* 功能格：墨石 + 白字 */
+.cell.special{
+  background:radial-gradient(circle at 34% 26%, #4A4550, #221F29 60%, #12101A);
+  border-color:#0B0A10; color:#F2EFF6;
+  box-shadow:0 2px 3px rgba(0,0,0,.5), inset -1px -2px 4px rgba(0,0,0,.55);
+}
+.cell.special .nm{color:#fff; background:rgba(0,0,0,.5); letter-spacing:.02em}
+.cell.jail{background:radial-gradient(circle at 34% 26%, #6B4E7A, #3B2A44 60%, #20172A)}
+.cell.scenic{background:radial-gradient(circle at 34% 26%, #4E8A63, #1F3B2C 62%, #12251B)}
+.cell.shop{background:radial-gradient(circle at 34% 26%, #A6772F, #3A2A14 62%, #241A0D)}
+.cell.stock{background:radial-gradient(circle at 34% 26%, #3A7C9E, #132C3A 62%, #0B1A23)}
+.cell.special.jail .nm,.cell.special.scenic .nm,
+.cell.special.shop .nm,.cell.special.stock .nm{background:transparent}
+.cell.locked{background:radial-gradient(circle at 35% 28%, #D9D3C6, #B9B2A2 62%, #9B9484); opacity:.75}
+.cell.broken{background:radial-gradient(circle at 35% 28%, #C9A9A4, #8E6A66 62%, #6B4B48); color:#F3E7E5}
+.cell.owned{box-shadow:0 1px 2px rgba(0,0,0,.35), inset 0 0 0 3px var(--owner,#ccc)}
+.cell.chain[data-chain]::before{
+  left:auto; right:1px; top:1px; background:var(--owner,#999);
+  font-family:var(--mono); border-radius:2px; z-index:3;
+  font-size:calc(var(--cell) * .14); line-height:1;
+}
+/* 棋子（玩家）保持国际象棋，加投影 */
+.token{filter:drop-shadow(0 2px 3px rgba(0,0,0,.55)); color:#fff}
+.token.active{color:#fff}
+/* 缩放按钮 */
+#boardTools{right:calc(var(--cell,44px) * .3); bottom:calc(var(--cell,44px) * .3)}
+#boardTools button{
+  width:calc(var(--cell,44px) * .72); height:calc(var(--cell,44px) * .72);
+  background:rgba(14,14,20,.86); color:#fff; border:1px solid var(--line2);
+  border-radius:2px; font-family:var(--mono);
+  font-size:calc(var(--cell,44px) * .34);
+}
+#boardTools button:hover{border-color:var(--accent); color:var(--accent)}
+
+/* ============================================================
+   3) 楼市指数 —— 炒股终端
+   ============================================================ */
+#kline{
+  background:#08080C; border-color:#1E1E28; padding:8px 10px 10px;
+  position:relative;
+}
+#kline::before{
+  content:"● ● ●   HZ-INDEX  ·  MLS 600052";
+  display:block; font-family:var(--mono); font-size:calc(9px * var(--ts)); line-height:1;
+  color:#565666; letter-spacing:.1em;
+  margin-bottom:6px; padding-bottom:5px; border-bottom:1px solid #1A1A24;
+}
+.k-head b{font-family:var(--mono); font-size:calc(10px * var(--ts)); color:#7C7C8C; letter-spacing:.08em}
+#kPrice{font-family:var(--mono); font-size:calc(19px * var(--ts)); font-weight:700; color:#fff; letter-spacing:.5px}
+#kDiff{font-family:var(--mono); font-size:calc(10.5px * var(--ts))}
+#kDiff.up{color:var(--up)} #kDiff.down{color:var(--down)}
+#kMetaChip{font-family:var(--mono); font-size:calc(8.5px * var(--ts)); color:#565666; letter-spacing:.06em}
+#kChart{
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 26px),
+    #05050A;
+  border:1px solid #16161E; border-radius:1px;
+}
+.k-foot div{
+  background:#0F0F16; border:1px solid #1A1A24; border-radius:1px;
+  font-family:var(--mono);
+}
+.k-foot i{color:#565666; font-size:calc(8px * var(--ts)); letter-spacing:.06em}
+.k-foot b{color:#E8E8F0}
+.k-foot b.pos{color:var(--up)} .k-foot b.neg{color:var(--down)}
+
+/* ============================================================
+   4) 道具 / 技能 —— 手机
+   ============================================================ */
+#items{
+  background:linear-gradient(180deg,#16161E,#0C0C12);
+  border-color:#33333F; border-radius:20px 20px 16px 16px;
+  padding:16px 7px 12px; position:relative;
+}
+/* 听筒 + 前置镜头 */
+#items::before{
+  content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+  width:54px; height:5px; border-radius:3px; background:#2A2A36;
+  box-shadow:0 0 0 1px #1A1A24;
+}
+/* Home 指示条 */
+#items::after{
+  content:""; position:absolute; bottom:5px; left:50%; transform:translateX(-50%);
+  width:62px; height:3px; border-radius:2px; background:#3A3A48;
+}
+#items .item{
+  background:#1B1B25; border:1px solid #2C2C38; border-radius:12px;
+  box-shadow:0 1px 0 rgba(255,255,255,.05), inset 0 -2px 0 rgba(0,0,0,.4);
+  color:#EDEDF2; padding:5px 2px 4px;
+}
+#items .item .ic{font-size:calc(13px * var(--ts)); filter:saturate(.9)}
+#items .item b{font-family:var(--mono); color:var(--gold)}
+#items .item .nm{color:#8C8C9A; font-size:calc(7.5px * var(--ts))}
+#items .item.off{opacity:.3}
+#items .item:active:not(.off){transform:translateY(1px); box-shadow:none}
+
+/* 技能：手机上的一个「大按钮」 */
+#bar{align-items:stretch}
+#skill{
+  background:linear-gradient(180deg,#1E1E2A,#12121A);
+  border:1px solid #33333F; border-radius:16px;
+  color:#C9C9D6; font-size:calc(10px * var(--ts)); letter-spacing:.04em;
+  box-shadow:0 2px 0 #0A0A10, inset 0 1px 0 rgba(255,255,255,.07);
+  width:82px;
+}
+#skill small{color:#6E6E80; font-family:var(--mono); font-size:calc(8px * var(--ts))}
+#skill.ready{
+  background:linear-gradient(180deg,#3A2E12,#241D0A);
+  border-color:var(--gold); color:#F2D48A;
+  box-shadow:0 2px 0 #0A0A10, 0 0 14px rgba(232,180,74,.28), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+/* ============================================================
+   5) 掷骰 —— 聚宝盆
+   ============================================================ */
+#roll{
+  position:relative; border:1px solid #6E5216; min-height:54px;
+  /* 上宽下窄的盆：顶部圆角大、底部收得紧 */
+  border-radius:46% 46% 38% 38% / 34% 34% 66% 66%;
+  background:
+    radial-gradient(ellipse at 50% 12%, rgba(255,246,210,.95) 0%, rgba(232,180,74,.55) 26%, transparent 54%),
+    linear-gradient(180deg,#C79A2E 0%, #A87A18 34%, #7E5A0E 68%, #513805 100%);
+  color:#2A1E02; font-size:calc(15px * var(--ts)); font-weight:800; letter-spacing:2px;
+  text-shadow:0 1px 0 rgba(255,255,255,.45);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.5),
+    inset 0 -10px 18px rgba(0,0,0,.45),
+    0 3px 0 #3A2804, 0 8px 18px rgba(0,0,0,.5);
+  overflow:hidden;
+}
+#roll::before{
+  content:""; position:absolute; left:6%; right:6%; top:4%; height:26%;
+  border-radius:50%; border:1.5px solid rgba(255,255,255,.4);
+  background:linear-gradient(180deg, rgba(255,255,255,.34), transparent);
+  pointer-events:none;
+}
+#roll small{color:#3A2804; opacity:.75; letter-spacing:0; font-weight:600; font-size:calc(9px * var(--ts))}
+#roll::after{
+  content:""; position:absolute; left:14%; right:14%; bottom:10%; height:16%;
+  border-radius:50%; background:radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.28), transparent 70%);
+  pointer-events:none;
+}
+#roll:active{transform:translateY(2px); box-shadow:inset 0 2px 0 rgba(255,255,255,.4), inset 0 -8px 16px rgba(0,0,0,.5), 0 1px 0 #3A2804}
+#roll:disabled{
+  background:linear-gradient(180deg,#4A4A56,#2A2A34); color:#8C8C9A; border-color:#3A3A48;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.1), 0 3px 0 #16161E;
+}
+#roll:disabled::before{display:none}
+
+/* ============================================================
+   6) 菜单 —— 字典（书脊）
+   ============================================================ */
+#menu{
+  position:relative; width:54px;
+  background:linear-gradient(90deg,#3A2712 0%, #6B4A2A 8%, #8C6A3F 22%, #A9834F 68%, #7A5730 100%);
+  border:1px solid #2A1B0B; border-radius:2px 6px 6px 2px;
+  color:#F5EBD8; font-size:calc(10px * var(--ts)); line-height:1.15; letter-spacing:.06em;
+  box-shadow:inset -6px 0 8px rgba(0,0,0,.35), inset 2px 0 0 rgba(255,255,255,.25),
+             0 2px 0 #1A1006, 0 6px 12px rgba(0,0,0,.45);
+  writing-mode:vertical-rl; text-orientation:upright; padding:8px 4px;
+}
+#menu::after{
+  content:"A·C·M·S"; position:absolute; right:3px; top:0; bottom:0;
+  font-family:var(--mono); font-size:calc(6px * var(--ts)); line-height:1;
+  color:rgba(255,255,255,.35); letter-spacing:1px;
+  writing-mode:vertical-rl; display:flex; align-items:center;
+}
+
+/* ============================================================
+   7) 日志 —— 消费账单
+   ============================================================ */
+#logWrap{background:transparent; border:none; box-shadow:none}
+#log{
+  background:
+    repeating-linear-gradient(180deg, rgba(0,0,0,.028) 0 1px, transparent 1px 26px),
+    linear-gradient(180deg,#F7F2E6,#EDE6D6);
+  color:var(--paper-ink);
+  border:1px solid #C9BDA4; border-radius:1px;
+  font-family:var(--mono); font-size:calc(10.5px * var(--ts)); line-height:1.65;
+  padding:14px 12px 12px;
+  box-shadow:0 10px 0 -6px rgba(0,0,0,.7), 0 14px 26px rgba(0,0,0,.45), inset 0 1px 0 #fff;
+  position:relative;
+}
+/* 撕纸齿孔 */
+#log::before{
+  content:""; position:absolute; left:0; right:0; top:-1px; height:6px;
+  background:radial-gradient(circle at 5px 0, transparent 3.4px, #EDE6D6 3.6px) repeat-x;
+  background-size:10px 6px;
+}
+#log::after{
+  content:"— 消费明细 · RECEIPT —";
+  display:block; text-align:center; font:8.5px/1 var(--mono);
+  color:#9A8F79; letter-spacing:.16em; margin-top:8px;
+  border-top:1px dashed #C9BDA4; padding-top:6px;
+}
+#log p{color:#4A4038}
+#log p b{color:#241F1A}
+#log p.good{color:#1B7A3E}
+#log p.bad{color:#B3261E}
+#log p.sys{color:#6B4E9B}
+#log p.sep{color:#A99C82; border-color:#C9BDA4}
+#log p.sep::before,#log p.sep::after{
+  background:repeating-linear-gradient(to right,#C9BDA4 0 3px,transparent 3px 7px);
+}
+#logJump{background:#241F1A; border-radius:2px; font-family:var(--mono); font-size:calc(9px * var(--ts))}
+
+/* ============================================================
+   8) 弹层 / 提示 / 开局 —— 统一到深色体系
+   ============================================================ */
+#modal{background:rgba(6,6,10,.78); backdrop-filter:blur(3px)}
+.sheet{
+  background:var(--panel); color:var(--txt);
+  border:1.5px solid var(--line2); border-bottom:5px solid #07070B;
+  border-radius:var(--r); box-shadow:0 24px 60px rgba(0,0,0,.6);
+}
+.sheet h3{font-family:var(--mono); letter-spacing:.02em; color:#fff; font-size:calc(15px * var(--ts))}
+.sheet .sub{color:var(--mute)}
+.kv{border-bottom:1px dashed #2A2A36; color:var(--mute)}
+.kv b{color:#fff; font-family:var(--mono)}
+.warn{color:var(--accent2)}
+.btns button{border-radius:2px; letter-spacing:.04em}
+.btn-main{background:var(--accent); color:#fff; box-shadow:0 3px 0 #8A0300}
+.btn-sub{background:#22222C; color:var(--txt); box-shadow:0 3px 0 #0A0A10}
+.btn-gold{background:var(--gold); color:#241F0A; box-shadow:0 3px 0 #8A6E12}
+.btn-red{background:#C0392B; color:#fff; box-shadow:0 3px 0 #7A2118}
+.btns button:disabled{background:#2A2A34; color:#5E5E6E; box-shadow:0 3px 0 #16161E}
+.ev{border-bottom:1px dashed #262631}
+.ev .ev-n{color:#fff}
+.ev .ev-d{color:var(--mute)}
+.pickbtn{background:#1B1B25; border:1px solid var(--line); border-radius:2px; color:var(--txt)}
+.pickbtn span{color:var(--mute)}
+.pickbtn.on{border-color:var(--accent); background:#241417; box-shadow:0 0 0 1px #E1060044}
+.shop-row{border-bottom:1px dashed #262631}
+.shop-row .tx b{color:#fff}
+.shop-row .tx span{color:var(--mute)}
+.shop-row button{background:var(--accent); color:#fff; border-radius:2px; box-shadow:0 2px 0 #8A0300}
+.shop-row button:disabled{background:#2A2A34; color:#5E5E6E; box-shadow:0 2px 0 #16161E}
+
+#tip{background:#07070B; border:1px solid var(--line2); border-bottom:3px solid var(--accent); border-radius:2px}
+#tip b{color:#fff}
+#tip .t-meta{color:#7C7C8C}
+.toast{background:rgba(7,7,11,.94); border:1px solid var(--line2); border-radius:2px; font-family:var(--mono); font-size:calc(12px * var(--ts))}
+
+/* 宽屏：棋盘占左列，右栏统一材质 */
+@media (min-width:1040px){
+  #hud::before{font-size:calc(9px * var(--ts))}
+}
+
+/* 窄屏收一点密度 */
+@media (max-width:420px){
+  :root{--cell:40px}
+  .pcard{grid-template-columns:14px 8px minmax(40px,auto) repeat(4,1fr); gap:3px}
+  .pm b{font-size:calc(9px * var(--ts))}
+  #menu{width:48px}
+}
+
+/* 尊重「减少动态效果」 */
+@media (prefers-reduced-motion:reduce){
+  .token.active{animation:none}
+  .cell.chain{animation:none}
+}
