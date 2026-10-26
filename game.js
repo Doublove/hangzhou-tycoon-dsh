@@ -80,7 +80,7 @@ function buildRings(){
         const sc = SCENIC[ri] || SCENIC[0];
         return { t:"scenic", name:sc.short, fullName:sc.full, ring:ri, idx };
       }
-      const label = { chance:"机会", fate:"命运", bank:"银行", tax:"税务", stock:"证券", shop:"道具店" }[token] || "功能格";
+      const label = { chance:"机会", fate:"命运", bank:"银行", tax:"税务", stock:"证券", shop:"道具商店" }[token] || "功能格";
       return { t:token, name:label, ring:ri, idx };
     });
     return { cells, name:ring.name, years:ring.years };
@@ -765,7 +765,7 @@ function renderBoard(){
   const boardW = wrap.clientWidth || 420;
   const stepPx = boardW * RING_STEP;
   const cellPx = Math.round(stepPx * 0.86);
-  const slotPx = Math.round(Math.min(boardW * RING_BAND * 0.95, stepPx * 0.94));
+  const slotPx = Math.round(Math.min(boardW * RING_BAND * 0.95, stepPx * 0.80));
   wrap.style.setProperty("--cell", cellPx + "px");
   wrap.style.setProperty("--slot", slotPx + "px");
   if (wrap.parentElement && wrap.parentElement.style){
