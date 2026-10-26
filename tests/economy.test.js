@@ -168,15 +168,15 @@ test('TC-ECO-16 两侧都是同主，仍是 ×2 不叠乘', () => {
   assert.equal(env.tollOf(mid), Math.round(env.value(mid) * 0.10 * 2));
 });
 
-test('TC-ECO-17 跨起点不算相邻（idx1 与 idx25）', () => {
+test('TC-ECO-17 跨起点不算相邻（idx1 与 idx23）', () => {
   const env = F.boot();
   const p = env.state.players[0];
   const first = env.at(1);
-  const last = env.at(25);
+  const last = env.at(23);
   env.grant(p, first, 1);
   env.grant(p, last, 1);
-  assert.equal(env.adjacentBonus(first), 1, 'idx1 不应与 idx25 连片');
-  assert.equal(env.adjacentBonus(last), 1, 'idx25 不应与 idx1 连片');
+  assert.equal(env.adjacentBonus(first), 1, 'idx1 不应与 idx23 连片');
+  assert.equal(env.adjacentBonus(last), 1, 'idx23 不应与 idx1 连片');
 });
 
 test('TC-ECO-18 连片只影响过路费，不影响地价、租金、升级费', () => {

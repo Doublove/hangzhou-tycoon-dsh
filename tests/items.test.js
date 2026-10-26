@@ -104,11 +104,11 @@ test('TC-ITEM-07 进监狱时 5% 概率掉路障', () => {
   assert.equal(p.items.block, 0);
 });
 
-test('TC-ITEM-08 路障不能放在起点、监狱、风景区', () => {
+test('TC-ITEM-08 路障不能放在起点与风景区（监狱已不在环上）', () => {
   const env = F.boot();
   const p = env.state.players[0];
   p.items.block = 3;
-  ['start', 'jail', 'scenic'].forEach(t => {
+  ['start', 'scenic'].forEach(t => {
     const cell = env.curCells().find(c => c.t === t);
     assert.equal(env.placeBlock(p, cell), false, `${t} 格不应允许放路障`);
     assert.equal(cell.block, undefined, `${t} 格不应被标记`);
@@ -155,14 +155,14 @@ test('TC-ITEM-11 没有道具时使用失败，且不改变状态', () => {
 test('TC-ITEM-12 遥控骰子指定点数并生效', async () => {
   const env = F.boot();
   const p = env.state.players[0];
-  env.put(p, 24);
+  env.put(p, 20);
   p.items.dice = 1;
   assert.equal(env.useDiceItem(p, 4), true);
   assert.equal(p.nextRoll, 4);
   assert.equal(p.items.dice, 0);
   env.setRandom([0.999]);            // 自然掷骰会被指定值覆盖
   await env.takeTurn();
-  assert.equal(p.pos, (24 + 4) % 26);
+  assert.equal(p.pos, (20 + 4) % 24);
   assert.equal(p.nextRoll, 0, '用后即清');
 });
 

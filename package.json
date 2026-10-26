@@ -1,6 +1,6 @@
 {
   "name": "hangzhou-tycoon",
-  "version": "1.10.0",
+  "version": "2.0.0",
   "private": true,
   "description": "杭州大富翁 · 2010—2026 杭州楼市经营游戏（静态站点 + 自动化测试）",
   "type": "commonjs",

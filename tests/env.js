@@ -200,7 +200,7 @@ const EXPORTS = [
   'aiUseItems', 'boostByBao', 'cellAhead', 'tollAhead', 'humanPlayer',
   'serialize', 'restore', 'saveTo', 'loadFrom', 'newGame', 'startScreen', 'log', 'logSep',
   'ART', 'stockLot', 'onItemClick', 'showCell', 'closeSheet', 'render',
-  'shopPrice', 'stockValue', 'stockCost', 'stockPnl', 'landValue', 'assetOf',
+  'ringPos', 'cellPct', 'slotPct', 'RING_N', 'shopPrice', 'stockValue', 'stockCost', 'stockPnl', 'landValue', 'assetOf',
   'stockBuy', 'stockSell', 'pushCandle', 'renderKline', 'deckFor',
   'renderHUD', 'renderSkillBtn', 'renderItems',
   'showTip', 'showTipHTML', 'hideTip', 'activeMod', 'policyTip', 'legacyTip', 'skillTip',

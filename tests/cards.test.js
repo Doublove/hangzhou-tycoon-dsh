@@ -263,7 +263,7 @@ test('TC-CARD-23 机会卡：虚假宣传直接进监狱', () => {
   const p = env.state.players[0];
   env.CHANCE.find(c => c.t === '虚假宣传被立案').act(p);
   assert.equal(p.inJail, true);
-  assert.equal(env.curCells()[p.pos].t, 'jail');
+  assert.equal(env.curCells()[p.pos].t !== 'jail', true, '监狱不在环上');
 });
 
 test('TC-CARD-24 机会卡：烂尾地块可被"顺利交付"修复', () => {

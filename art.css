@@ -134,12 +134,12 @@ body::before{
 }
 /* 棋格线 + 五个星位 */
 #boardOuter::before{
-  content:""; position:absolute; inset:3.2%; pointer-events:none; z-index:0; opacity:.62;
-  /* 24 等分：格数固定，不随棋盘尺寸漂移 */
+  content:""; position:absolute; inset:13.5%; pointer-events:none; z-index:0; opacity:.55;
+  /* 7 等分：与 7×7 方环一一对齐 */
   background-image:
-    linear-gradient(to right, rgba(74,50,24,.9) 0 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(74,50,24,.9) 0 1px, transparent 1px);
-  background-size:4.1667% 4.1667%;
+    linear-gradient(to right, rgba(74,50,24,.85) 0 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(74,50,24,.85) 0 1px, transparent 1px);
+  background-size:14.2857% 14.2857%;
 }
 #boardOuter::after{
   content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.55;
@@ -153,12 +153,14 @@ body::before{
 #boardWrap{z-index:1}
 
 /* 地铁示意层 */
+#boardWrap .ring,.core{display:none}
 #boardWrap .metro{
   position:absolute; inset:0; pointer-events:none; z-index:0;
   opacity:.42; filter:saturate(.85) contrast(.95);
 }
 .metro-svg{display:block}
 /* 线网别钻到中央卫星圆里去，否则中间一团乱麻 */
+#boardWrap .ring,.core{display:none}
 #boardWrap .metro{
   -webkit-mask-image:radial-gradient(circle at 50% 50%, transparent 0 17%, #000 23%);
           mask-image:radial-gradient(circle at 50% 50%, transparent 0 17%, #000 23%);
@@ -178,7 +180,7 @@ body::before{
 
 /* 棋子 = 围棋子 */
 .cell{
-  overflow:hidden; border-radius:50%; width:var(--cell); height:var(--cell);
+  overflow:hidden; border-radius:16%; width:var(--cell); height:var(--cell);
   border:1.5px solid #7A5426;
   background:radial-gradient(circle at 35% 28%, #FFFDF6, #E7DEC8 62%, #C9BFA6);
   box-shadow:0 1px 2px rgba(0,0,0,.35), inset -1px -2px 3px rgba(0,0,0,.18);
@@ -466,3 +468,63 @@ body::before{
   .token.active{animation:none}
   .cell.chain{animation:none}
 }
+
+
+/* ============================================================
+   9) 方环棋盘：中央监狱 + 外圈房产位（V2.0）
+   ============================================================ */
+
+/* 中央监狱：不在行走环上，只能被卡牌送进来 */
+.jailbox{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:calc(var(--cell) * 1.02); height:calc(var(--cell) * 1.02);
+  border-radius:16%; z-index:3; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle at 34% 26%, #6B4E7A, #3B2A44 62%, #20172A);
+  border:1.5px solid #241A2B; color:#EDE7F3;
+  font-size:calc(var(--cell) * .26); font-weight:700; letter-spacing:.06em;
+  box-shadow:0 3px 0 #120E18, inset -1px -2px 4px rgba(0,0,0,.55);
+}
+.jailbox em{
+  position:absolute; left:50%; bottom:calc(var(--cell) * -.34);
+  width:0; height:0; border-left:calc(var(--cell)*.06) solid transparent;
+  border-right:calc(var(--cell)*.06) solid transparent;
+  border-top:calc(var(--cell)*.09) solid #8A6E12; transform:translateX(-50%);
+}
+
+/* 房产位：黑框常驻，紫框里画房子 */
+.slot{
+  position:absolute; transform:translate(-50%,-50%);
+  width:var(--slot); height:var(--slot);
+  border:2px solid #0B0A10; border-radius:5px;
+  background:linear-gradient(180deg,#191722,#100E15);
+  box-shadow:0 2px 0 #050408, 0 4px 8px rgba(0,0,0,.35);
+  z-index:2; cursor:pointer;
+}
+.slotbox{
+  position:absolute; inset:3px; border:2px dashed #B07BE0; border-radius:3px;
+  background:rgba(176,123,224,.07);
+  display:flex; align-items:flex-end; justify-content:center; overflow:hidden;
+}
+.slot .sname{
+  position:absolute; left:0; right:0; bottom:1px; text-align:center;
+  font-size:calc(var(--slot) * .15); line-height:1.1; color:#9A8FB0;
+  background:rgba(10,8,14,.55); letter-spacing:.02em;
+}
+.slot .house{
+  position:absolute; inset:1px 1px calc(var(--slot) * .17) 1px;
+  display:flex; align-items:flex-end; justify-content:center;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.5));
+}
+.slot .house svg{ width:82%; height:100%; }
+.slot.owned{ border-color:#2A2430; }
+.slot.owned .slotbox{
+  border-style:solid; border-color:#C89BF0;
+  box-shadow:inset 0 0 0 2px var(--owner,#999);
+  background:rgba(176,123,224,.13);
+}
+.slot.owned .sname{ color:#E6D8F5; }
+.slot.locked{ opacity:.42; }
+.slot.locked .slotbox{ border-color:#5E5E6E; background:rgba(255,255,255,.03); }
+.slot.broken .slotbox{ border-color:#E06B5E; background:rgba(224,107,94,.14); }
+.slot.broken .sname{ color:#F0B4AC; }

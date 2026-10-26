@@ -80,7 +80,7 @@ function buildRings(){
         const sc = SCENIC[ri] || SCENIC[0];
         return { t:"scenic", name:sc.short, fullName:sc.full, ring:ri, idx };
       }
-      const label = { chance:"机会", fate:"命运", bank:"银行", tax:"税务", stock:"证券", shop:"商店" }[token] || "功能格";
+      const label = { chance:"机会", fate:"命运", bank:"银行", tax:"税务", stock:"证券", shop:"道具店" }[token] || "功能格";
       return { t:token, name:label, ring:ri, idx };
     });
     return { cells, name:ring.name, years:ring.years };
@@ -712,66 +712,114 @@ function onCellClick(cell){
   showCell(cell);
 }
 
-// [PRD 3.1 / 9.5] 棋盘容器：年轮环与当前环
+/* ============================================================
+   棋盘几何：7×7 方环 = 24 格，监狱移到棋盘中心
+   ------------------------------------------------------------
+   索引 0 在顶边中点（起点），顺时针编号：
+     0..3   顶边右半        (3,0)(4,0)(5,0)(6,0)
+     4..9   右 边            (6,1)..(6,6)
+     10..15 底 边            (5,6)..(0,6)
+     16..21 左 边            (0,5)..(0,0)
+     22..23 顶边左半        (1,0)(2,0)
+   方环外侧留出 BAND 宽的带，用来放每块地的房产位（黑框常驻 + 紫框画房子）。
+   ============================================================ */
+const RING_N = 7;
+const RING_BAND = 0.135;
+const RING_SPAN = 1 - RING_BAND * 2;
+
+// 索引 → 网格坐标
+function ringPos(i){
+  const N = RING_N, L = N - 1;
+  if (i <= 3) return { c: 3 + i, r: 0 };
+  if (i <= 3 + L) return { c: N - 1, r: i - 3 };
+  if (i <= 3 + 2 * L) return { c: N - 1 - (i - 3 - L), r: N - 1 };
+  if (i <= 3 + 3 * L) return { c: 0, r: N - 1 - (i - 3 - 2 * L) };
+  return { c: i - (3 + 3 * L), r: 0 };
+}
+const RING_STEP = RING_SPAN / RING_N;
+
+// 格子中心（百分比）
+function cellPct(i){
+  const { c, r } = ringPos(i);
+  return { x: (RING_BAND + (c + 0.5) * RING_STEP) * 100,
+           y: (RING_BAND + (r + 0.5) * RING_STEP) * 100 };
+}
+// 房产位中心：贴着方环外侧，与所属地块同一行列对齐
+function slotPct(i){
+  const { c, r } = ringPos(i);
+  const cy = (RING_BAND + (r + 0.5) * RING_STEP) * 100;
+  const cx = (RING_BAND + (c + 0.5) * RING_STEP) * 100;
+  if (r === 0) return { x: cx, y: RING_BAND * 50 };
+  if (r === RING_N - 1) return { x: cx, y: (1 - RING_BAND * 0.5) * 100 };
+  if (c === 0) return { x: RING_BAND * 50, y: cy };
+  return { x: (1 - RING_BAND * 0.5) * 100, y: cy };
+}
+
+// [PRD 3.1 / 9.5] 棋盘容器：方格环 + 中心监狱 + 外圈房产位
 function renderBoard(){
   const wrap = $("#boardWrap");
-  wrap.querySelectorAll(".cell,.token,.oldring,.metro").forEach(n => n.remove());
+  wrap.querySelectorAll(".cell,.token,.oldring,.metro,.slot,.jailbox,.chainlink,.token").forEach(n => n.remove());
   const cells = curCells();
-  const n = cells.length, R = 44;
 
-  /* [PRD 9.1] 棋子尺寸跟着盘面走：固定 44px 在大屏上会缩成一堆小点。
-     26 颗棋子均匀落在半径 44% 的圆上，弧长间距约 0.106W，
-     棋子取 0.094W 时刚好「挨着但不压」，像真的围棋盘。 */
+  /* [PRD 9.1] 尺寸跟着盘面走 */
   const boardW = wrap.clientWidth || 420;
-  const cellPx = Math.max(34, Math.min(64, Math.round(boardW * 0.092)));
+  const stepPx = boardW * RING_STEP;
+  const cellPx = Math.round(stepPx * 0.86);
+  const slotPx = Math.round(Math.min(boardW * RING_BAND * 0.95, stepPx * 0.94));
   wrap.style.setProperty("--cell", cellPx + "px");
-  /* #boardTools 是 #boardWrap 的兄弟节点，不继承这里的变量，单独挂一份 */
-  if (wrap.parentElement && wrap.parentElement.style)
+  wrap.style.setProperty("--slot", slotPx + "px");
+  if (wrap.parentElement && wrap.parentElement.style){
     wrap.parentElement.style.setProperty("--cell", cellPx + "px");
+    wrap.parentElement.style.setProperty("--slot", slotPx + "px");
+  }
   state.cellPx = cellPx;
+  state.slotPx = slotPx;
 
-  /* [PRD 3.1 / 9.5] 棋盘底纹：本章结束年份的地铁线路示意（拓扑图，非地理图）
-     加中央城市核心的卫星底片，见 art.js */
+  /* [PRD 3.1 / 9.5] 棋盘底纹：本章结束年份的地铁线路示意 */
   if (window.ART){
     const metro = document.createElement("div");
     metro.className = "metro";
     metro.innerHTML = ART.metro(ART.yearOf(state.chapter));
     wrap.appendChild(metro);
-    const core = wrap.querySelector(".core");
-    if (core){
-      core.style.cssText = ART.coreStyle();
-      const y = core.querySelector("span");
-      if (y) y.textContent = (RINGS[curCh().ring] || {}).years || "";
-    }
   }
 
-  // 旧环示意
-  state.rings.forEach((r, i) => {
-    if (i >= state.chapter) return;
-    const d = document.createElement("div");
-    d.className = "oldring";
-    const scale = 62 - i * 12;
-    d.style.width = scale + "%"; d.style.height = scale + "%";
-    wrap.appendChild(d);
-  });
+  // 中央监狱：不在行走环上，只能被卡牌送进来
+  const jail = document.createElement("div");
+  jail.className = "jailbox";
+  jail.innerHTML = `<span>监狱</span><em></em>`;
+  jail.onclick = () => showCell({ t:"jail", name:"监狱" });
+  wrap.appendChild(jail);
 
   cells.forEach((cell, i) => {
-    const a = (-90 + i * 360 / n) * Math.PI / 180;
+    const pos = cellPct(i);
     const el = document.createElement("div");
     el.className = "cell " + (cell.t === "plot" ? "land" : "special");
     el.dataset.i = i;
-    el.style.left = (50 + R * Math.cos(a)) + "%";
-    el.style.top = (50 + R * Math.sin(a)) + "%";
+    el.style.left = pos.x + "%";
+    el.style.top = pos.y + "%";
     el.onclick = () => onCellClick(cell);
     el.innerHTML = cell.t === "plot"
       ? `<span class="nm">${cell.name}</span><span class="lv"></span><span class="bar"></span>`
       : `<span class="nm">${cell.name}</span>`;
     wrap.appendChild(el);
+
+    // 每块地在外圈有一个常驻房产位
+    if (cell.t === "plot"){
+      const sp = slotPct(i);
+      const slot = document.createElement("div");
+      slot.className = "slot";
+      slot.dataset.i = i;
+      slot.style.left = sp.x + "%";
+      slot.style.top = sp.y + "%";
+      slot.onclick = () => onCellClick(cell);
+      slot.innerHTML = `<div class="slotbox"><span class="sname"></span><span class="house"></span></div>`;
+      wrap.appendChild(slot);
+    }
   });
   renderCells();
 }
 
-// [PRD 9.5] 逐格渲染：地块砖、建筑分级、归属色
+// [PRD 9.5] 逐格渲染：地块砖、归属色、连片标记
 function renderCells(){
   const cells = curCells();
   cells.forEach(cell => {
@@ -779,7 +827,7 @@ function renderCells(){
     if (!el) return;
     el.classList.toggle("blocked", !!cell.block);
     if (cell.t !== "plot" && cell.t !== "start"){
-      el.classList.add(cell.t);          // jail / scenic / shop / stock / bank / chance / fate
+      el.classList.add(cell.t);
       return;
     }
     if (cell.t !== "plot") return;
@@ -788,7 +836,6 @@ function renderCells(){
     const chained = !!cell.owner && adjacentBonus(cell) > 1;
     el.classList.toggle("chain", chained);
     el.dataset.chain = chained ? "×2" : "";
-    el.style.background = chained ? cell.owner.color + "1F" : "";
     el.querySelector(".lv").textContent = cell.lv ? "●".repeat(cell.lv) : "";
     const bar = el.querySelector(".bar");
     if (cell.owner){
@@ -802,97 +849,95 @@ function renderCells(){
     }
   });
   renderChains();
-  renderBuildings();
+  renderSlots();
 }
 
-/* [PRD 3.4 / 6.4] 建筑画在内圈：棋子只留名字（保证可读），房子沿环内侧排一圈。
-   26 栋楼落在半径 rin 的圆上，弧长间距大于楼宽，不会叠。 */
-function renderBuildings(){
+/* [PRD 3.4 / 6.4] 房产位：黑框常驻显示地块状态，紫框里按等级画房子
+   空地 → 只有紫框；已购入 → 房子随等级长高；烂尾 → 红框；未挂牌 → 变暗 */
+function renderSlots(){
   const wrap = $("#boardWrap");
   if (!wrap) return;
-  wrap.querySelectorAll(".bldring").forEach(n => n.remove());
-  if (!window.ART) return;
-  const cells = curCells(), n = cells.length, R = 44;
-  const W = wrap.clientWidth || 400;
-  const cellPx = state.cellPx || Math.round(W * 0.092);
-  const Rp = R / 100 * W;
-  const bw = cellPx * 0.60, bh = cellPx * 0.82;
-  const rin = Rp - cellPx * 0.50;          // 棋子的内沿
-  const rb = rin - bh * 0.5;               // 楼的中心：让楼底边正好落在内沿上，不压名字
-
-  cells.forEach((c, i) => {
-    if (c.t !== "plot" || !c.owner || c.lv <= 0 || c.broken) return;
-    const a = (-90 + i * 360 / n) * Math.PI / 180;
-    const x = W / 2 + rb * Math.cos(a);
-    const y = W / 2 + rb * Math.sin(a);
-    const d = document.createElement("div");
-    d.className = "bldring";
-    d.style.left = x.toFixed(1) + "px";
-    d.style.top = y.toFixed(1) + "px";
-    d.style.width = bw.toFixed(1) + "px";
-    d.style.height = bh.toFixed(1) + "px";
-    d.innerHTML = ART.building(c.lv, c.owner.color || "#B08A5A");
-    wrap.appendChild(d);
+  curCells().forEach(cell => {
+    if (cell.t !== "plot") return;
+    const slot = document.querySelector(`.slot[data-i="${cell.idx}"]`);
+    if (!slot) return;
+    const box = slot.querySelector(".slotbox");
+    const house = slot.querySelector(".house");
+    const name = slot.querySelector(".sname");
+    const owned = !!cell.owner;
+    slot.classList.toggle("owned", owned);
+    slot.classList.toggle("locked", !cell.unlocked);
+    slot.classList.toggle("broken", !!cell.broken);
+    if (owned) slot.style.setProperty("--owner", cell.owner.color);
+    else slot.style.removeProperty("--owner");
+    if (name) name.textContent = owned && cell.lv > 0 ? `Lv${cell.lv}` : (cell.unlocked ? "空地" : "待出让");
+    if (house){
+      house.innerHTML = (owned && cell.lv > 0 && !cell.broken && window.ART)
+        ? ART.building(cell.lv, cell.owner.color || "#B08A5A")
+        : "";
+    }
+    if (box) box.title = `${cell.name}${owned ? " · " + cell.owner.name : ""}`;
   });
 }
 
-/* 连片特效：沿环外侧画一条同色连接带，把相邻同主的两格串起来
-   （格子间距只有 3px，画在格间会完全被遮住，所以外扩到环外） */
-// [PRD 9.6] 连片特效：×2 标记与环内侧同色连接带
+/* [PRD 9.6] 连片特效：相邻同主的两格之间画一条同色短带 */
 function renderChains(){
   const wrap = $("#boardWrap");
   if (!wrap) return;
   wrap.querySelectorAll(".chainlink").forEach(n => n.remove());
-  const cells = curCells(), n = cells.length, R = 43;
+  const cells = curCells(), n = cells.length;
   const W = wrap.clientWidth || 400;
-  const Rp = R / 100 * W;              // 环半径（像素）
-  const cellPx = state.cellPx || Math.round(W * 0.094);
-  const railR = Rp - cellPx * 0.62;    // 画在棋子内侧的空白区，不压棋子也不出界
   cells.forEach((c, i) => {
     if (c.t !== "plot" || !c.owner) return;
     if (i === n - 1) return;                       // 首尾不连（跨起点）
     const nb = cells[(i + 1) % n];
     if (nb.t !== "plot" || nb.owner !== c.owner) return;
-
-    const a1 = (-90 + i * 360 / n) * Math.PI / 180;
-    const a2 = (-90 + (i + 1) * 360 / n) * Math.PI / 180;
-    const x1 = W / 2 + railR * Math.cos(a1), y1 = W / 2 + railR * Math.sin(a1);
-    const x2 = W / 2 + railR * Math.cos(a2), y2 = W / 2 + railR * Math.sin(a2);
-    const dx = x2 - x1, dy = y2 - y1;
-    const len = Math.hypot(dx, dy);
+    const a = cellPct(i), b = cellPct(i + 1);
+    const x1 = a.x / 100 * W, y1 = a.y / 100 * W;
+    const x2 = b.x / 100 * W, y2 = b.y / 100 * W;
+    const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy);
     if (len < 6) return;
     const d = document.createElement("div");
     d.className = "chainlink";
-    d.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotate(${Math.atan2(dy, dx) * 180 / Math.PI}deg);background:${c.owner.color}`;
+    d.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;` +
+      `transform:rotate(${Math.atan2(dy, dx) * 180 / Math.PI}deg);background:${c.owner.color}`;
     wrap.appendChild(d);
   });
 }
 
-// [PRD 9.4] 棋子：国际象棋造型，同格多人自动缩排
+// [PRD 9.4] 棋子：国际象棋造型；被关押的棋子画在中央监狱
 function renderTokens(){
   const wrap = $("#boardWrap");
   wrap.querySelectorAll(".token").forEach(n => n.remove());
-  const n = curCells().length, R = 43;
-  const by = {};
-  state.players.forEach(p => { if (!p.bankrupt) (by[p.pos] = by[p.pos] || []).push(p); });
   const cur = state.players[state.turnIdx];
+  const jailed = state.players.filter(p => !p.bankrupt && p.inJail);
+  const by = {};
+  state.players.forEach(p => {
+    if (p.bankrupt || p.inJail) return;
+    (by[p.pos] = by[p.pos] || []).push(p);
+  });
+
+  const place = (p, x, y, cnt, k) => {
+    const t = document.createElement("div");
+    t.className = "token" + (p === cur && !state.over ? " active" : "");
+    t.style.color = p.color;
+    t.textContent = PIECE[p.id] || "♟";
+    const size = cnt === 1 ? 27 : cnt === 2 ? 24 : 21;
+    t.style.fontSize = size + "px";
+    const dx = cnt > 1 ? (k - (cnt - 1) / 2) * (size * 0.78) : 0;
+    t.style.left = `calc(${x}% + ${dx}px)`;
+    t.style.top = `${y}%`;
+    wrap.appendChild(t);
+  };
+
   Object.keys(by).forEach(idx => {
-    const a = (-90 + idx * 360 / n) * Math.PI / 180;
-    const bx = 50 + R * Math.cos(a), byy = 50 + R * Math.sin(a);
-    const list = by[idx], cnt = list.length;
-    list.forEach((p, k) => {
-      const t = document.createElement("div");
-      t.className = "token" + (p === cur && !state.over ? " active" : "");
-      t.style.color = p.color;
-      t.textContent = PIECE[p.id] || "♟";
-      // 同格多人时缩小并横向排开，避免叠在一起看不清
-      const size = cnt === 1 ? 27 : cnt === 2 ? 24 : 21;
-      t.style.fontSize = size + "px";
-      const dx = cnt > 1 ? (k - (cnt - 1) / 2) * (size * 0.78) : 0;
-      t.style.left = `calc(${bx}% + ${dx}px)`;
-      t.style.top = `calc(${byy}% + 11px)`;
-      wrap.appendChild(t);
-    });
+    const pos = cellPct(+idx);
+    by[idx].forEach((p, k) => place(p, pos.x, pos.y + 3, by[idx].length, k));
+  });
+  // 监狱：最多 4 枚横排
+  jailed.forEach((p, k) => {
+    const dx = (k - (jailed.length - 1) / 2) * 20;
+    place(p, 50 + dx / (wrap.clientWidth || 400) * 100, 50, 1, 0);
   });
 }
 
@@ -1650,8 +1695,8 @@ function rollScenicStay(){
 
 // [PRD 3.7.1] 进监狱：跳过移动，偶数出狱，3 次保底
 function sendToJail(p, reason){
-  const j = curCells().findIndex(x => x.t === "jail");
-  if (j >= 0) p.pos = j;
+  /* 监狱在棋盘中心、不在行走环上：只置状态，棋子位置保持在原地，
+     释放后从原地继续走（V2.0 布局改动） */
   p.inJail = true; p.jailFail = 0; p.scenicTurns = 0;
   renderTokens(); renderHUD();
   log(`<b>${p.name}</b> ${reason || "被带走调查"}，需掷出偶数才能继续前进`, "bad");

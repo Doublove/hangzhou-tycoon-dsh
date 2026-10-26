@@ -28,18 +28,18 @@ test('TC-TURN-01 单骰点数为 1—6，不会出现 0 或 7', async () => {
 test('TC-TURN-02 掷 1 点前进 1 格', async () => {
   const env = F.boot();
   const p = env.state.players[0];
-  env.put(p, 23);
+  env.put(p, 8);                 // 8 + 1 = 9 → 风景区（V2.0 在 9 号格）
   env.setRandom([0]);
   await env.takeTurn();
-  assert.equal(p.pos, 24);
-  assert.equal(env.curCells()[24].t, 'scenic');
+  assert.equal(p.pos, 9);
+  assert.equal(env.curCells()[9].t, 'scenic');
   assert.ok(p.scenicTurns >= 1, '落在风景区应产生停留');
 });
 
 test('TC-TURN-03 经过起点：月供 1 万 + 当前现金 3%', async () => {
   const env = F.boot();
   const p = env.state.players[0];
-  env.put(p, 20);              // 20 + 6 = 26 → 回到起点
+  env.put(p, 18);              // 18 + 6 = 24 → 回到起点
   p.cash = 1000;
   env.setRandom([0.999]);      // 6 点
   await env.takeTurn();
@@ -155,12 +155,19 @@ test('TC-TURN-12 连续 3 次奇数后，第 4 回合强制出狱', async () => 
   assert.equal(p.pos, (jailIdx + 1) % 26);
 });
 
-test('TC-TURN-13 踩中监狱格直接进监狱', async () => {
+test('TC-TURN-13 被送进监狱：只置状态，棋子留在原地（V2.0）', async () => {
   const env = F.boot();
   const p = env.state.players[0];
+  env.put(p, 1);                 // 从 idx1 出发，出狱后 +6 落在 7 号地块，不会再抽卡
+  const before = p.pos;
   env.sendToJail(p, '测试');
   assert.equal(p.inJail, true);
-  assert.equal(env.curCells()[p.pos].t, 'jail');
+  assert.equal(p.pos, before, '监狱不在环上，位置不变');
+  // 掷偶数出狱后继续前进
+  env.setRandom([0.999]);        // 6 点，偶数
+  await env.takeTurn();
+  assert.equal(p.inJail, false);
+  assert.equal(p.pos, (before + 6) % 24);
 });
 
 /* ---------------- 风景区 ---------------- */

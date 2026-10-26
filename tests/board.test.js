@@ -21,25 +21,25 @@ test('TC-MAP-01 四环对应四章，环名与年代连续', () => {
   ]);
 });
 
-test('TC-MAP-02 每环 26 格（起点 1 + 地块 16 + 功能格 9）', () => {
+test('TC-MAP-02 每环 24 格（起点 1 + 地块 16 + 功能格 7，V2.0 方环）', () => {
   const env = F.boot();
   env.RINGS.forEach((ring, i) => {
     const cells = env.state.rings[i].cells;
-    assert.equal(cells.length, 26, `第 ${i} 环应为 26 格`);
+    assert.equal(cells.length, 24, `第 ${i} 环应为 24 格`);
     const count = t => cells.filter(c => c.t === t).length;
     assert.equal(count('start'), 1);
     assert.equal(count('plot'), 16);
     assert.equal(
       cells.length - count('start') - count('plot'),
-      9,
-      '功能格应为 9 个',
+      7,
+      '功能格应为 7 个（监狱不在环上）',
     );
   });
 });
 
-test('TC-MAP-03 功能格构成：机会2 命运2 银行1 证券1 监狱1 风景区1 商店1（V1.8）', () => {
+test('TC-MAP-03 功能格构成：机会2 命运1 银行1 证券1 风景区1 商店1，监狱在中心（V2.0）', () => {
   const env = F.boot();
-  const expected = { chance: 2, fate: 2, bank: 1, stock: 1, jail: 1, scenic: 1, shop: 1, tax: 0 };
+  const expected = { chance: 2, fate: 1, bank: 1, stock: 1, scenic: 1, shop: 1, jail: 0, tax: 0 };
   env.state.rings.forEach((ring, i) => {
     const count = t => ring.cells.filter(c => c.t === t).length;
     Object.entries(expected).forEach(([t, n]) => {
@@ -53,11 +53,11 @@ test('TC-MAP-04 起点固定在 idx 0 且唯一，首尾不相连', () => {
   env.state.rings.forEach(ring => {
     assert.equal(ring.cells[0].t, 'start');
     assert.equal(ring.cells.filter(c => c.t === 'start').length, 1);
-    // 首尾隔断：idx 25 与 idx 1 不是邻居
+    // 首尾隔断：idx 23 与 idx 1 不是邻居
     const first = ring.cells[1];
-    const last = ring.cells[25];
-    assert.ok(!env.neighbors(first).includes(last), 'idx 1 不应把 idx 25 当作邻居');
-    assert.ok(!env.neighbors(last).includes(first), 'idx 25 不应把 idx 1 当作邻居');
+    const last = ring.cells[23];
+    assert.ok(!env.neighbors(first).includes(last), 'idx 1 不应把 idx 23 当作邻居');
+    assert.ok(!env.neighbors(last).includes(first), 'idx 23 不应把 idx 1 当作邻居');
   });
 });
 
@@ -142,13 +142,17 @@ test('TC-MAP-12 风景区随章节换名，机制格位不变', () => {
   assert.equal(new Set(idx).size, 1, '各环风景区应位于同一格位');
 });
 
-test('TC-MAP-13 监狱每环唯一，且不是起点', () => {
+test('TC-MAP-13 监狱不在行走环上（只能被卡牌送进去）', () => {
   const env = F.boot();
   env.state.rings.forEach(ring => {
-    const jails = ring.cells.filter(c => c.t === 'jail');
-    assert.equal(jails.length, 1);
-    assert.notEqual(jails[0].idx, 0);
+    assert.equal(ring.cells.filter(c => c.t === 'jail').length, 0, '行走环上不应有监狱格');
   });
+  // 送进去之后棋子位置不变，只有 inJail 标记
+  const p = env.state.players[0];
+  const before = p.pos;
+  env.sendToJail(p, '测试');
+  assert.equal(p.inJail, true);
+  assert.equal(p.pos, before, '进监狱不改棋子位置');
 });
 
 test('TC-MAP-14 切换到第二章后，行走环切到中环', () => {
@@ -172,9 +176,9 @@ test('TC-MAP-15 TRACK_PATTERN 的 p0—p15 与地块数量一一对应', () => {
   });
 });
 
-test('TC-MAP-16 26 格单骰一圈约 7.4 回合（节奏预算）', () => {
+test('TC-MAP-16 24 格单骰一圈约 6.9 回合（节奏预算）', () => {
   const env = F.boot();
-  assert.equal(env.curCells().length, 26);
-  const laps = 26 / 3.5;   // 单骰期望 3.5
-  assert.ok(laps > 7 && laps < 8, `一圈应约 7.4 回合，实际 ${laps.toFixed(2)}`);
+  assert.equal(env.curCells().length, 24);
+  const laps = 24 / 3.5;   // 单骰期望 3.5
+  assert.ok(laps > 6 && laps < 8, `一圈应约 6.9 回合，实际 ${laps.toFixed(2)}`);
 });
