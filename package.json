@@ -1,12 +1,12 @@
 {
   "name": "hangzhou-tycoon",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "杭州大富翁 · 2010—2026 杭州楼市经营游戏（静态站点 + 自动化测试）",
   "type": "commonjs",
   "scripts": {
     "test": "node --test",
-    "test:unit": "node --test tests/board.test.js tests/economy.test.js tests/turn.test.js tests/cards.test.js tests/items.test.js tests/skills.test.js tests/bankrupt.test.js tests/save.test.js",
+    "test:unit": "node --test tests/board.test.js tests/economy.test.js tests/layout.test.js tests/turn.test.js tests/cards.test.js tests/items.test.js tests/skills.test.js tests/bankrupt.test.js tests/save.test.js",
     "test:balance": "node --test tests/balance.test.js",
     "test:doc": "node tests/report.js"
   },

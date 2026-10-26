@@ -31,7 +31,11 @@
         复位成 block，否则棋盘会直接变成 flex 子项——而它带 margin:0 auto，
         auto margin 会吃掉剩余空间，把右侧栏顶到屏幕最右边。
      2. #app 宽屏要 width:auto（收缩到内容），否则整行留白会分摊到两侧。 */
-  #boardCol,#sideCol{display:contents}
+  /* 窄屏：只摊平侧栏。#boardCol 必须保持 block —— 若它也 display:contents，
+     棋盘就成了列向 flex 的子项；flex 先算主轴（高度，来自内容 = 0）再拉伸交叉轴（宽度），
+     aspect-ratio 在算高度时拿不到宽度，棋盘会塌成 0 高（v1.9.3 起的移动端空白 bug）。 */
+  #sideCol{display:contents}
+  #boardCol{display:block; order:0}
   #hud{order:-1}
 
   @media (min-width:1080px){
@@ -99,6 +103,7 @@
 
   /* ============ 棋盘 ============ */
   #boardOuter{position:relative;width:var(--board,100%);max-width:100%;aspect-ratio:1/1;
+              min-height:280px;
               border:2px solid var(--line);border-radius:18px;background:#fff;
               box-shadow:0 2px 0 var(--line);overflow:hidden}
   #boardWrap{position:relative;width:100%;height:100%;min-width:0;min-height:0}
@@ -372,10 +377,10 @@
 <div id="tip"></div>
 
 <!-- [PRD 10.3] 配置文件：整局只在这里读一次，之后全部读内存 -->
-<link rel="stylesheet" href="art.css?v=2.0.0">
-<script src="art.js?v=2.0.0"></script>
-<script src="config.js?v=2.0.0"></script>
-<script src="data.js?v=2.0.0"></script>
-<script src="game.js?v=2.0.0"></script>
+<link rel="stylesheet" href="art.css?v=2.0.1">
+<script src="art.js?v=2.0.1"></script>
+<script src="config.js?v=2.0.1"></script>
+<script src="data.js?v=2.0.1"></script>
+<script src="game.js?v=2.0.1"></script>
 </body>
 </html>
